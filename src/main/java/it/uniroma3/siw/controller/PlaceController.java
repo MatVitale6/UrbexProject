@@ -3,6 +3,8 @@ package it.uniroma3.siw.controller;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.controller.validator.PlaceValidator;
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Place;
+import it.uniroma3.siw.model.Review;
 import it.uniroma3.siw.repository.PlaceRepository;
+import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.PlaceService;
+import it.uniroma3.siw.service.ReviewService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -28,6 +34,12 @@ public class PlaceController {
     private PlaceService placeService;
     @Autowired
     private PlaceRepository placeRepository;
+
+    @Autowired
+    private ReviewService reviewService;
+
+    @Autowired
+    private CredentialsService credentialsService;
 
 
     /* metodo getter per ottenere la form per la creazione di un nuovo place */
@@ -57,6 +69,7 @@ public class PlaceController {
         }
     }
 
+    /* Metodo get per l'eliminazione di un place */
     @GetMapping(value ="/deletePlace/{placeID}")
     public String deletePlace(@PathVariable("placeID") Long placeID, Model model) {
         this.placeService.deletePlace(placeID);
@@ -64,7 +77,14 @@ public class PlaceController {
         return "redirect:place.html";
     }
 
-    /* Metodi get e post per l'aggiornamento delle informazioni sui place */
+    @GetMapping(value="/deletePhoto/{placeID}/{photoID}")
+    public String deletePhoto(@PathVariable("placeID") Long placeID, @PathVariable("photoID") Long photoID, Model model) {
+        this.placeService.deletePhotoFromPlace(placeID, photoID);
+
+        return "redirect:/admin/formUpdatePlace/"+placeID;
+    }
+
+    /* Metodi get per l'aggiornamento delle informazioni sui place */
     @GetMapping(value="/admin/formUpdatePlace/{placeID}")
     public String formUpdatePlace(@PathVariable("placeID") Long placeID, Model model) {
         model.addAttribute("place", placeRepository.findById(placeID).get());
@@ -72,6 +92,7 @@ public class PlaceController {
         return "admin/formUpdatePlace.html";
     }
 
+    /* Metodo post per l'aggiornamento delle informazioni riguardo ad un place */
     @PostMapping(value="/admin/formUpdatePlace/{placeID}")
     public String updatePlace(@PathVariable("placeID") Long placeID, @Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model) {
 
@@ -102,6 +123,52 @@ public class PlaceController {
 
         return "places.html";
     }
+
+    /* Metodo getter per ottenere la pagina del place in dettaglio */
+    @GetMapping("/place/{placeID}")
+    public String getPlace(@PathVariable("placeID") Long placeID, Model model) {
+        model.addAttribute("place", this.placeService.findPlaceByID(placeID));
+        model.addAttribute("review", new Review());
+        model.addAttribute("credentials", this.getCredentials());
+
+        if(this.getCredentials() != null) {
+            model.addAttribute("hasReview", this.reviewService.existsReviewByAuthorAndPlace(this.getCredentials().getUser().getId(), placeID));
+        }
+        return "place.html";
+    }
+
+    @GetMapping("/formSearchPlaces")
+    public String formSearchPlace() {
+        return "formSearchPlace";
+    }
+
+    @PostMapping("/searchPlacesByRegion") 
+    public String searchPlacesByRegion(Model model, @RequestParam String region) {
+        model.addAttribute("places", this.placeRepository.findByRegion(region));
+
+        return "foundMovies.html";
+    }
+
+    @PostMapping("/searchPlacesByAddress") 
+    public String searchPlacesByAddress(Model model, @RequestParam String address) {
+        model.addAttribute("places", this.placeRepository.findByAddress(address));
+
+        return "foundMovies.html";
+    }
+
+    
+
+
+	private Credentials getCredentials() {
+		if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
+			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+			return credentials;
+		}
+		return null;
+	}
+
 
 
 
