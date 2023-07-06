@@ -44,8 +44,7 @@ public class Place {
 
 	private boolean isApproved;
 
-	@OneToMany(mappedBy = "placeToApprove")
-	private User recommendedBy;
+	//private User recommendedBy;
 	
 
     public Long getId() {
@@ -120,12 +119,14 @@ public class Place {
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
 	}
+	/*
 	public User getRecommendedBy() {
         return recommendedBy;
     }
     public void setRecommendedBy(User recommendedBy) {
         this.recommendedBy = recommendedBy;
     }
+	*/
 
 	@Override
 	public int hashCode() {

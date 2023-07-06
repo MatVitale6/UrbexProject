@@ -78,13 +78,14 @@ public class PlaceController {
 
         return "redirect:place.html";
     }
-
+    /*
     @PostMapping(value="/rejectPlace/{placeID}")
     public String rejectPlace(@PathVariable("placeID") Long placeID, Model model) {
         this.placeService.rejectPlace(placeID);
 
         return "redirect:place.html";
     }
+    */
 
     @GetMapping(value="/deletePhoto/{placeID}/{photoID}")
     public String deletePhoto(@PathVariable("placeID") Long placeID, @PathVariable("photoID") Long photoID, Model model) {
@@ -124,7 +125,7 @@ public class PlaceController {
 
         return "admin/managePlaces.html";
     }
-
+    /*
     @GetMapping(value="/admin/notApprovedPlace")
     public String getNotApprovedPlace(Model model) {
         model.addAttribute("places", this.placeRepository.findAllByApproved(false));
@@ -133,12 +134,15 @@ public class PlaceController {
     }
 
     /* Metodo getter per ottenere la pagina html con tutti i places presenti nel sito */
+    /* 
     @GetMapping("/approvedPlace")
     public String getApprovedPlaces(Model model) {
         model.addAttribute("places", this.placeRepository.findAllByApproved(true));
 
         return "places.html";
     }
+    */
+    
 
     /* Metodo getter per ottenere la pagina del place in dettaglio */
     @GetMapping("/place/{placeID}")

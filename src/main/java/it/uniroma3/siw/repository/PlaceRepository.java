@@ -14,5 +14,5 @@ public interface PlaceRepository extends CrudRepository<Place, Long> {
 
     public Object findByAddress(String address);
 
-	List<Place> findAllByApproved(boolean isApproved);
+	// public List<Place> findAllByApproved(boolean isApproved);
 }

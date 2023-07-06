@@ -94,7 +94,7 @@ public class PlaceService {
 
         return place;
     }
-
+    /*
     @Transactional
     public Place rejectPlace(Long placeID) {
         Place place = this.placeRepository.findById(placeID).orElse(null);
@@ -106,6 +106,7 @@ public class PlaceService {
         }
         return place;
     }
+    */
 
     @Transactional
     public Place updatePlaceDetails(Long placeID, Place newPlace) {
