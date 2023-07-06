@@ -1,0 +1,24 @@
+
+body
+{
+    height: 100%;
+    width: 100%;
+    background-color: #2b2f32;
+}
+h3{
+    color:white;
+}
+p{
+    color: white;
+}
+span{
+    color: red;
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+label{
+    color: white;
+}
