@@ -22,3 +22,7 @@ a{
 label{
     color: white;
 }
+
+.move-center {
+    margin-top: 250px;
+}
