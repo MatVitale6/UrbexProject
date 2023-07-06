@@ -45,6 +45,11 @@
                         </div>
 
                         <div class="form-outline mb-4 text-center">
+                            <input type="text" id="username" class="form-control form-control-lg bg-success text-white" placeholder="username" th:field="${credentials.username}"/>
+                            <label class="form-label" for="username">Username</label>
+                        </div>
+
+                        <div class="form-outline mb-4 text-center">
                             <input type="password" id="password" class="form-control form-control-lg bg-success text-white" placeholder="password" th:field="${credentials.password}"/>
                             <label class="form-label" for="password">Password</label>
                         </div>
