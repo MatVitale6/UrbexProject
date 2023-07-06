@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -26,6 +27,9 @@ public class User {
 
 	@OneToMany(mappedBy="author")
 	private List<Review> writtens; //si intende recensioni scritte
+
+	@ManyToOne
+	private List<Place> placesToApprove;
 
 
 	public Long getId() {
@@ -65,6 +69,13 @@ public class User {
 
 	public void setWrittens(List<Review> writtens) {
 		this.writtens = writtens;
+	}
+	public List<Place> getPlacesToApprove() {
+		return placesToApprove;
+	}
+
+	public void setPlacesToApprove(List<Place> placesToApprove) {
+		this.placesToApprove = placesToApprove;
 	}
 
 

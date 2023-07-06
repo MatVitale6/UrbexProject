@@ -56,7 +56,7 @@ public class AuthConfiguration {
         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
         .requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
         .requestMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
-        .requestMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority(DEFAULT_ROLE,ADMIN_ROLE)
+        .requestMatchers(HttpMethod.GET, "/user/**", "/formNewPlace").hasAnyAuthority(DEFAULT_ROLE,ADMIN_ROLE)
         .requestMatchers(HttpMethod.POST, "/user/**").hasAnyAuthority(DEFAULT_ROLE,ADMIN_ROLE)
 
         .anyRequest().authenticated()

@@ -41,8 +41,14 @@ public class Place {
 	private Set<Photo> photos;
 	@OneToMany
 	private List<Review> reviews;
+
+	private boolean isApproved;
+
+	@OneToMany(mappedBy = "placeToApprove")
+	private User recommendedBy;
 	
-	public Long getId() {
+
+    public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
@@ -108,6 +114,19 @@ public class Place {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+	public User getRecommendedBy() {
+        return recommendedBy;
+    }
+    public void setRecommendedBy(User recommendedBy) {
+        this.recommendedBy = recommendedBy;
+    }
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(address, name);

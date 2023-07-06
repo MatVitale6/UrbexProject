@@ -42,16 +42,17 @@ public class PlaceController {
     private CredentialsService credentialsService;
 
 
-    /* metodo getter per ottenere la form per la creazione di un nuovo place */
-    @GetMapping(value="/admin/formNewPlace")
-    public String formNewPlace(Model model) {
+    /* metodo getter per ottenere la form per la creazione di un nuovo place in attesa di approvazione */
+    @GetMapping("/formNewPlace/{userID}")
+    public String formNewPlace(@PathVariable("userID") Long userID, Model model) {
         model.addAttribute("place", new Place());
+        model.addAttribute("credentials", this.credentialsService.getCredentials(userID));
 
-        return "admin/formNewPlace";
+        return "formNewPlace.html";
     }
 
     /* metodo post per la effettiva creazione di un nuovo place, chiamato quando viene cliccato
-     * il button */
+     * il button per l'approvazione di un place */
     @PostMapping("/admin/place")
     public String createPlace(@Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model,
                              @RequestParam("file") MultipartFile[] file) throws IOException {
@@ -59,6 +60,7 @@ public class PlaceController {
         if(!bindingResult.hasErrors()) {
             this.placeService.newPlace(place, file, model);
             model.addAttribute("place", place);
+            place.setApproved(true);
 
             return "place.html";
         }                       
@@ -73,6 +75,13 @@ public class PlaceController {
     @GetMapping(value ="/deletePlace/{placeID}")
     public String deletePlace(@PathVariable("placeID") Long placeID, Model model) {
         this.placeService.deletePlace(placeID);
+
+        return "redirect:place.html";
+    }
+
+    @PostMapping(value="/rejectPlace/{placeID}")
+    public String rejectPlace(@PathVariable("placeID") Long placeID, Model model) {
+        this.placeService.rejectPlace(placeID);
 
         return "redirect:place.html";
     }
@@ -116,10 +125,17 @@ public class PlaceController {
         return "admin/managePlaces.html";
     }
 
-    /* Metodo getter per ottenere la pagina html con tutti i places inseriti */
-    @GetMapping("/place")
-    public String getPlaces(Model model) {
-        model.addAttribute("places", this.placeRepository.findAll());
+    @GetMapping(value="/admin/notApprovedPlace")
+    public String getNotApprovedPlace(Model model) {
+        model.addAttribute("places", this.placeRepository.findAllByApproved(false));
+
+        return "notApprovedPlaces.html";
+    }
+
+    /* Metodo getter per ottenere la pagina html con tutti i places presenti nel sito */
+    @GetMapping("/approvedPlace")
+    public String getApprovedPlaces(Model model) {
+        model.addAttribute("places", this.placeRepository.findAllByApproved(true));
 
         return "places.html";
     }
@@ -137,6 +153,7 @@ public class PlaceController {
         return "place.html";
     }
 
+    /* Metodi per la ricerca di un place mediante: indirizzo o regione */
     @GetMapping("/formSearchPlaces")
     public String formSearchPlace() {
         return "formSearchPlace";

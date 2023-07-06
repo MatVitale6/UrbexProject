@@ -13,4 +13,6 @@ public interface PlaceRepository extends CrudRepository<Place, Long> {
 	public boolean existsByAddressAndName(String address, String name);
 
     public Object findByAddress(String address);
+
+	List<Place> findAllByApproved(boolean isApproved);
 }
