@@ -27,34 +27,34 @@
                     <form style="width: 23rem;" th:action="@{/register}" method="POST">
 
                         <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Register</h3>
-                        <div class="row">
+                        <div class="row mb-3">
                         <div class="form-group col-sm-6 text-center">
                             <input type="text" id="nome" class="form-control form-control-lg bg-success text-white" placeholder="Name" required th:field="${user.name}"/>
-                            <label class="form-label" for="nome">Name</label>
+                            <label class="form-label" for="nome"></label>
                         </div>
 
                         <div class="form-group col-sm-6 text-center">
                             <input type="text" id="cognome" class="form-control form-control-lg bg-success text-white" placeholder="Surname" required th:field="${user.surname}"/>
-                            <label class="form-label" for="cognome">Surname</label>
+                            <label class="form-label" for="cognome"></label>
                         </div>
 
                         </div>
-                        <div class="form-outline mb-4 text-center">
-                            <input type="email" id="email" class="form-control form-control-lg bg-success text-white" placeholder="email" required th:field="${user.email}"/>
-                            <label class="form-label" for="email">Email address</label>
+                        <div class="form-outline mb-3 text-center">
+                            <input type="email" id="email" class="form-control form-control-lg bg-success text-white" placeholder="Email address" required th:field="${user.email}"/>
+                            <label class="form-label" for="email"></label>
                         </div>
 
-                        <div class="form-outline mb-4 text-center">
-                            <input type="text" id="username" class="form-control form-control-lg bg-success text-white" placeholder="username" th:field="${credentials.username}"/>
-                            <label class="form-label" for="username">Username</label>
+                        <div class="form-outline mb-3 text-center">
+                            <input type="text" id="username" class="form-control form-control-lg bg-success text-white" placeholder="Username" th:field="${credentials.username}"/>
+                            <label class="form-label" for="username"></label>
                         </div>
 
-                        <div class="form-outline mb-4 text-center">
-                            <input type="password" id="password" class="form-control form-control-lg bg-success text-white" placeholder="password" th:field="${credentials.password}"/>
-                            <label class="form-label" for="password">Password</label>
+                        <div class="form-outline mb-3 text-center">
+                            <input type="password" id="password" class="form-control form-control-lg bg-success text-white" placeholder="Password" th:field="${credentials.password}"/>
+                            <label class="form-label" for="password"></label>
                         </div>
 
-                        <div class="pt-1 mb-4 text-center">
+                        <div class="pt-1 mb-3 text-center">
                             <button class="btn btn-outline-success btn-lg" type="submit">Register</button>
                         </div>
 
