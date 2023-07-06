@@ -26,3 +26,28 @@ label{
 .move-center {
     margin-top: 250px;
 }
+
+.background-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    animation: animate 16s ease-in-out infinite;
+    background-size: cover;
+}
+
+@keyframes animate {
+    0%,100% {
+        background-image: url(/images/IndexSlideshow/1.jpeg);
+    }
+    25% {
+        background-image: url(/images/IndexSlideshow/2.jpeg);
+    }
+    50% {
+        background-image: url(/images/IndexSlideshow/3.jpeg);
+    }
+    75% {
+        background-image: url(/images/IndexSlideshow/4.jpeg);
+    }
+}
