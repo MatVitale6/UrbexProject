@@ -29,6 +29,9 @@
 				<div class="fw-normal mb-3 pb-3 text-center">
 					<p>Vuoi accedere al sito?<br>Effettua il login qui: <a href="formLogin.html" class="link-info">Log in here</a></p>
 				</div>
+                    <p>
+                        <a th:href="@{'/formNewPlace/' + ${credentials.user.id}}">Aggiungi place</a>
+                    </p>
 				</div>
             </div>
 
