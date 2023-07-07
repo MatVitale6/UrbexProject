@@ -6,6 +6,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 @ControllerAdvice
 public class GlobalController {
@@ -19,5 +21,10 @@ public class GlobalController {
             user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         }
         return user;
+    }
+
+    @GetMapping("/resourceNotFound")
+    public String getResourceNotFound() {
+        return "resourceNotFound.html";
     }
 }

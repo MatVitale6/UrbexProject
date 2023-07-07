@@ -2,7 +2,6 @@ package it.uniroma3.siw.model;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +25,7 @@ public class User {
 	private String email;
 
 	@OneToMany(mappedBy="author")
-	private List<Review> writtens; //si intende recensioni scritte
+	private List<Review> reviews; //si intende recensioni scritte
 
 	//@OneToMany(mappedBy="recommendedBy")
 	//private List<Place> placesToApprove;
@@ -63,12 +62,16 @@ public class User {
 		this.email = email;
 	}
 
-	public List<Review> getWrittens() {
-		return writtens;
+    public List<Review> getReviews() {
+		return reviews;
 	}
 
-	public void setWrittens(List<Review> writtens) {
-		this.writtens = writtens;
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	public void addReview(Review review) {
+		this.reviews.add(review);
 	}
 	/*
 	public List<Place> getPlacesToApprove() {

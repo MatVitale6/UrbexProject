@@ -51,3 +51,7 @@ label{
         background-image: url(/images/IndexSlideshow/4.jpeg);
     }
 }
+
+.bg-rgb {
+    background-color: rgb(50, 50, 50);
+}

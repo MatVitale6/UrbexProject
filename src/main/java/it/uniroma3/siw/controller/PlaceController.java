@@ -67,7 +67,7 @@ public class PlaceController {
         else {
             /*
             *TODO: aggiungere messaggio di errore */
-            return "admin/formNewPlace";
+            return "/formNewPlace.html";
         }
     }
 
@@ -97,9 +97,16 @@ public class PlaceController {
     /* Metodi get per l'aggiornamento delle informazioni sui place */
     @GetMapping(value="/admin/formUpdatePlace/{placeID}")
     public String formUpdatePlace(@PathVariable("placeID") Long placeID, Model model) {
-        model.addAttribute("place", placeRepository.findById(placeID).get());
+        Place place;
+        try {
+            place = this.placeService.findPlaceByID(placeID);
+            model.addAttribute("place", place);
 
-        return "admin/formUpdatePlace.html";
+            return "return admin/formUpdatePlace.html";
+        }
+        catch (Exception e) {
+            return "/resourceNotFound.html";
+        }
     }
 
     /* Metodo post per l'aggiornamento delle informazioni riguardo ad un place */
@@ -147,9 +154,16 @@ public class PlaceController {
     /* Metodo getter per ottenere la pagina del place in dettaglio */
     @GetMapping("/place/{placeID}")
     public String getPlace(@PathVariable("placeID") Long placeID, Model model) {
-        model.addAttribute("place", this.placeService.findPlaceByID(placeID));
+        Place place;
+        try {
+            place = placeService.findPlaceByID(placeID);
+        }
+        catch(Exception e) {
+            return "resourceNotFound.html";
+        }
+
+        model.addAttribute("place", place);
         model.addAttribute("review", new Review());
-        model.addAttribute("credentials", this.getCredentials());
 
         if(this.getCredentials() != null) {
             model.addAttribute("hasReview", this.reviewService.existsReviewByAuthorAndPlace(this.getCredentials().getUser().getId(), placeID));

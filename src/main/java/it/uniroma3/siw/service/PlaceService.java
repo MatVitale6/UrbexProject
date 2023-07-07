@@ -86,7 +86,7 @@ public class PlaceService {
             photoRepository.delete(ph);
         }
         for(Review rvw : place.getReviews()) {
-            rvw.getAuthor().getWrittens().remove(rvw);
+            rvw.getAuthor().getReviews().remove(rvw);
             userRepository.save(rvw.getAuthor());
             reviewRepository.delete(rvw);
         }
