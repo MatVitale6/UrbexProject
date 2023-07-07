@@ -149,7 +149,13 @@ public class PlaceController {
         return "places.html";
     }
     */
-    
+
+    /*Metodo per ottenere la pagina con tutti i places*/
+    @GetMapping("/places")
+    public String showPlaces(Model model) {
+        model.addAttribute("places", this.placeService.findAllPlace());
+        return "/places.html";
+    }
 
     /* Metodo getter per ottenere la pagina del place in dettaglio */
     @GetMapping("/place/{placeID}")
