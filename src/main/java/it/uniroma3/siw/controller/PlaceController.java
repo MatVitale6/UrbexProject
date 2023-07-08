@@ -53,13 +53,14 @@ public class PlaceController {
 
     /* metodo post per la effettiva creazione di un nuovo place, chiamato quando viene cliccato
      * il button per l'approvazione di un place */
-    @PostMapping("/admin/place")
-    public String createPlace(@Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model,
+    @PostMapping("/place/{userID}")
+    public String createPlace(@Valid @ModelAttribute("place") Place place,@PathVariable("userID") Long userID, BindingResult bindingResult, Model model,
                              @RequestParam("file") MultipartFile[] file) throws IOException {
         this.placeValidator.validate(place, bindingResult);
         if(!bindingResult.hasErrors()) {
             this.placeService.newPlace(place, file, model);
             model.addAttribute("place", place);
+            model.addAttribute("credentials", this.credentialsService.getCredentials(userID));
             place.setApproved(true);
 
             return "place.html";
@@ -69,6 +70,13 @@ public class PlaceController {
             *TODO: aggiungere messaggio di errore */
             return "/formNewPlace.html";
         }
+    }
+
+    @PostMapping("/admin/updatePlaceImage/{placeId}")
+    public String updateMovieImage(@PathVariable("placeId") Long placeID, @RequestParam("file") MultipartFile[] file) throws IOException {
+        this.placeService.updatePlaceImage(placeID, file);
+
+        return "place.html";
     }
 
     /* Metodo get per l'eliminazione di un place */
@@ -156,6 +164,7 @@ public class PlaceController {
         model.addAttribute("places", this.placeService.findAllPlace());
         return "/places.html";
     }
+
 
     /* Metodo getter per ottenere la pagina del place in dettaglio */
     @GetMapping("/place/{placeID}")
