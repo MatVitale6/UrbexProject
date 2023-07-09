@@ -31,26 +31,36 @@
 
                 <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">New Place</h3>
 
-                    <div class="row mb-3">
-                        <div class="form-group col-sm-6 text-center">
-                            <input type="text" id="nome" class="form-control form-control-lg bg-success text-white" placeholder="Name" required th:field="${place.name}"/>
-                            <label class="form-label" for="nome"></label>
-                        </div>
-
-                        <div class="form-group col-sm-6 text-center">
-                            <input type="text" id="regione" class="form-control form-control-lg bg-success text-white" placeholder="Region" required th:field="${place.region}"/>
-                            <label class="form-label" for="regione"></label>
-                        </div>
+                <div class="row mb-3">
+                    <div class="form-group col-sm-6 text-center">
+                        <input type="text" id="nome" class="form-control form-control-lg bg-success text-white" placeholder="Name" required th:field="${place.name}"/>
+                        <label class="form-label" for="nome"></label>
                     </div>
 
-                    <div class="form-outline mb-3 text-center">
-                        <input type="text" id="indirizzo" class="form-control form-control-lg bg-success text-white" placeholder="Address" required th:field="${place.address}"/>
-                        <label class="form-label" for="indirizzo"></label>
+                    <div class="form-group col-sm-6 text-center">
+                        <input type="text" id="regione" class="form-control form-control-lg bg-success text-white" placeholder="Region" required th:field="${place.region}"/>
+                        <label class="form-label" for="regione"></label>
                     </div>
+                </div>
 
-                    <div class="form-outline mb-3 text-center bg-success">
-                        <label>Immagini:</label> <span><input type="file" name="file" multiple></span>
-                    </div>
+                <div class="form-outline mb-3 text-center">
+                    <input type="text" id="indirizzo" class="form-control form-control-lg bg-success text-white" placeholder="Address" required th:field="${place.address}"/>
+                    <label class="form-label" for="indirizzo"></label>
+                </div>
+
+                <div class="form-outline mb-3 text-center bg-success">
+                    <label>Immagini:</label> <span><input type="file" name="file" multiple></span>
+                </div>
+
+                <div class="form-outline mb-3 text-center">
+                    <input type="text" id="descrizione" class="form-control form-control-lg bg-success text-white" placeholder="Description" required th:field="${place.description}"/>
+                    <label class="form-label" for="descrizione"></label>
+                </div>
+
+                <div class="form-outline mb-3 text-center">
+                    <input type="checkbox" id="accessibile" class="form-control-lg bg-success text-white" required th:field="${place.accessibility}"/>
+                    <label class="form-label" for="accessibile">Accessibile</label>
+                </div>
 
 
 

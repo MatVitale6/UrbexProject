@@ -44,8 +44,8 @@ public class ReviewController {
 	}
 
 	@PostMapping("/addReview/{placeID}/{userID}")
-	public String addReview(@Valid @ModelAttribute("review") Review review, @PathVariable("placeID") Long placeID, 
-								@PathVariable("userID") Long userID, Model model, BindingResult bindingResult) {
+	public String addReview(@Valid @ModelAttribute("review") Review review,BindingResult bindingResult, @PathVariable("placeID") Long placeID,
+								@PathVariable("userID") Long userID, Model model) {
 		//this.reviewValidator.validate(review, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			this.reviewService.addReview(review, placeID, userID, model);

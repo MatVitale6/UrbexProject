@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Urbex Collection</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/cover.css">
+    <link rel="stylesheet" href="/css/stile.css">
+</head>
+
+<body>
+<div class="cover-container d-flex h-75 p-3 mr-2 flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner col-3">
+            <h3 class="masthead-brand">Logos</h3>
+            <nav class="nav nav-masthead justify-content-center col-6">
+                <a class="nav-link active" href="/">Home</a>
+                <a class="nav-link" th:href="@{/login}">Login</a>
+                <a class="nav-link" href="#">bho</a>
+            </nav>
+        </div>
+    </header>
+</div>
+
+<div class="container-fluid mw-100">
+    <div class="row">
+
+        <div class="col-sm-6">
+            <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+                <form th:action="@{'/addReview' + '/' + ${place.id} + '/' +${credentials.user.id}}" method="POST" th:object="${review}">
+                    <div th:if="${#fields.hasGlobalErrors()}">
+                        <p th:each="err:${#fields.globalErrors()}"th:text="${err}">...</p>
+                    </div>
+                    <div>
+                        <label for="titolo">Titolo:</label> <span><input type="text" th:field="${review.title}" id="titolo"/></span>
+                        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+                    </div>
+
+                    <div>
+                        <label for="voto">Votazione:</label> <span><input type="number" th:field="${review.rating}" id="voto"/></span>
+                        <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+                    </div>
+                    <div>
+                        <label for="descrizione">Descrizione</label><span><textarea type="text" th:field="${review.text}" id="descrizione"/></span>
+                    </div>
+
+                    <div>
+                        <span><button type="submit">Conferma</button></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-6 px-0 d-none d-sm-block">
+            <!--<img src="/images/login.JPG"
+                 alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">-->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
+                    <img class="w-100 vh-100" style="object-fit: cover; object-position: left;" src="/images/IndexSlideshow/2.jpeg" alt="Second slide">
+                </div>
+
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

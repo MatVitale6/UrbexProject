@@ -170,6 +170,7 @@ public class PlaceController {
     @GetMapping("/place/{placeID}")
     public String getPlace(@PathVariable("placeID") Long placeID, Model model) {
         Place place;
+        model.addAttribute("credentials", this.getCredentials());
         try {
             place = placeService.findPlaceByID(placeID);
         }

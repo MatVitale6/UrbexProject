@@ -46,7 +46,7 @@
           <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
           <img class="d-block w-100" src="/images/IndexSlideshow/2.jpeg" alt="Second slide">
           <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-            <h5 th:text="${place.name}">Forza Roma</h5>
+            <a th:href="@{'place' + '/' + ${place.id}}" th:text="${place.name}">Forza Roma</a>
             <p th:text="${place.description}">Sempre Forza ROMA!</p>
           </div>
         </div>
