@@ -17,7 +17,14 @@
                 <h3 class="masthead-brand">Urbex</h3>
                 <nav class="nav nav-masthead justify-content-center row-6">
                     <a class="nav-link active" href="/">Home</a>
-                    <a class="nav-link" th:href="@{/login}">Login</a>
+                    <div class="nav-link">
+                        <div th:if="${userDetails != null}">
+                            <a href="/logout">Logout</a>
+                        </div>
+                        <div th:unless="${userDetails != null}">
+                            <a href="/login">Login</a>
+                        </div>
+                    </div>
                     <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
                 </nav>
             </div>
