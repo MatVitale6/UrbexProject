@@ -46,6 +46,7 @@ public class PlaceController {
     @GetMapping(value="/admin/formNewPlace")
     public String formNewPlace(Model model) {
         model.addAttribute("place", new Place());
+        model.addAttribute("credentials", this.getCredentials());
 
         return "admin/formNewPlace.html";
     }
@@ -56,6 +57,7 @@ public class PlaceController {
     public String createPlace(@Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model,
                              @RequestParam("file") MultipartFile[] file) throws IOException {
         this.placeValidator.validate(place, bindingResult);
+        model.addAttribute("credentials", this.getCredentials());
         if(!bindingResult.hasErrors()) {
             this.placeService.newPlace(place, file, model);
             model.addAttribute("place", place);
