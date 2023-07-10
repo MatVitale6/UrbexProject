@@ -25,13 +25,13 @@
                             <a href="/login">Login</a>
                         </div>
                     </div>
-                    <a class="nav-link" href="#">bho</a>
+                    <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
                 </nav>
             </div>
         </header>
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-            <form th:action="@{/admin/place}" method="POST" th:object="${place}" enctype="multipart/form-data ">
+            <form th:action="@{/admin/place}" method="POST" th:object="${place}" enctype="multipart/form-data">
                 <div th:if="${#fields.hasGlobalErrors()}">
                     <p th:each="err:${#fields.globalErrors()}"th:text="${err}">...</p>
                 </div>
@@ -59,7 +59,8 @@
                 </div>
 
                 <div class="form-outline mb-3 text-center bg-success">
-                    <label>Immagini:</label> <span><input type="file" name="file" multiple></span>
+                    <label for="immagini" class="form-label"></label>
+                    <input type="file" id="immagini" name="file" class="form-control form-control-lg bg-success text-white" multiple>
                 </div>
 
                 <div class="form-outline mb-3 text-center">

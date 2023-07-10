@@ -38,6 +38,9 @@
                     <p>Region: <a th:text="${place.region}">Roma</a></p>
                     <p>Address: <a th:text="${place.address}">via roma</a></p>
                     <p>Accessibility: <a th:boolean="${place.accessibility}">false</a></p>
+                    <div th:each="img : ${place.photos}">
+                        <img th:src="'data:image/jpeg;base64,'+${img.getImgData()}">
+                    </div>
                 </div>
             </div>
             <div class="row-6" th:unless="${place.reviews}"></div>
