@@ -43,32 +43,30 @@ public class PlaceController {
 
 
     /* metodo getter per ottenere la form per la creazione di un nuovo place in attesa di approvazione */
-    @GetMapping("/formNewPlace/{userID}")
-    public String formNewPlace(@PathVariable("userID") Long userID, Model model) {
+    @GetMapping(value="/admin/formNewPlace")
+    public String formNewPlace(Model model) {
         model.addAttribute("place", new Place());
-        model.addAttribute("credentials", this.credentialsService.getCredentials(userID));
 
-        return "formNewPlace.html";
+        return "admin/formNewPlace.html";
     }
 
     /* metodo post per la effettiva creazione di un nuovo place, chiamato quando viene cliccato
      * il button per l'approvazione di un place */
-    @PostMapping("/place/{userID}")
-    public String createPlace(@Valid @ModelAttribute("place") Place place,@PathVariable("userID") Long userID, BindingResult bindingResult, Model model,
+    @PostMapping("/admin/place")
+    public String createPlace(@Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model,
                              @RequestParam("file") MultipartFile[] file) throws IOException {
         this.placeValidator.validate(place, bindingResult);
         if(!bindingResult.hasErrors()) {
             this.placeService.newPlace(place, file, model);
             model.addAttribute("place", place);
-            model.addAttribute("credentials", this.credentialsService.getCredentials(userID));
-            place.setApproved(true);
+            //place.setApproved(true);
 
             return "place.html";
         }                       
         else {
             /*
             *TODO: aggiungere messaggio di errore */
-            return "/formNewPlace.html";
+            return "admin/formNewPlace.html";
         }
     }
 

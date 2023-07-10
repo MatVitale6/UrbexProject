@@ -29,9 +29,7 @@ public class Photo {
 
 	@Past
 	private LocalDate date;
-	
-	private String author;
-	
+
 
 
 	public Long getId() {
@@ -48,14 +46,6 @@ public class Photo {
 
 	public void setDate(LocalDate date) {
 		this.date = date;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String autor) {
-		this.author = autor;
 	}
 
 	public byte[] getData() {

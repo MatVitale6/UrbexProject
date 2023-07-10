@@ -24,7 +24,7 @@
         </header>
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-            <form th:action="@{'/place' + '/' +${credentials.user.id}}" method="POST" th:object="${place}">
+            <form th:action="@{/admin/place}" method="POST" th:object="${place}" enctype="multipart/form-data ">
                 <div th:if="${#fields.hasGlobalErrors()}">
                     <p th:each="err:${#fields.globalErrors()}"th:text="${err}">...</p>
                 </div>
@@ -34,17 +34,20 @@
                 <div class="row mb-3">
                     <div class="form-group col-sm-6 text-center">
                         <input type="text" id="nome" class="form-control form-control-lg bg-success text-white" placeholder="Name" required th:field="${place.name}"/>
+                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                         <label class="form-label" for="nome"></label>
                     </div>
 
                     <div class="form-group col-sm-6 text-center">
                         <input type="text" id="regione" class="form-control form-control-lg bg-success text-white" placeholder="Region" required th:field="${place.region}"/>
+                        <span th:if="${#fields.hasErrors('region')}" th:errors="*{region}"></span>
                         <label class="form-label" for="regione"></label>
                     </div>
                 </div>
 
                 <div class="form-outline mb-3 text-center">
                     <input type="text" id="indirizzo" class="form-control form-control-lg bg-success text-white" placeholder="Address" required th:field="${place.address}"/>
+                    <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
                     <label class="form-label" for="indirizzo"></label>
                 </div>
 
@@ -58,7 +61,7 @@
                 </div>
 
                 <div class="form-outline mb-3 text-center">
-                    <input type="checkbox" id="accessibile" class="form-control-lg bg-success text-white" required th:field="${place.accessibility}"/>
+                    <input type="checkbox" id="accessibile" class="form-control-lg bg-success text-white" th:field="${place.accessibility}"/>
                     <label class="form-label" for="accessibile">Accessibile</label>
                 </div>
 
