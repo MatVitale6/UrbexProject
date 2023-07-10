@@ -18,12 +18,12 @@
                 <h3 class="masthead-brand">Logos</h3>
                 <nav class="nav nav-masthead justify-content-center row-6">
                     <a class="nav-link active" href="/">Home</a>
-                    <div class="nav-link">
+                    <div class="px-2">
                         <div th:if="${userDetails != null}">
-                            <a href="/logout">Logout</a>
+                            <a class="nav-link" href="/logout">Logout</a>
                         </div>
                         <div th:unless="${userDetails != null}">
-                            <a href="/login">Login</a>
+                            <a class="nav-link" href="/login">Login</a>
                         </div>
                     </div>
                     <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
