@@ -190,21 +190,21 @@ public class PlaceController {
     /* Metodi per la ricerca di un place mediante: indirizzo o regione */
     @GetMapping("/formSearchPlaces")
     public String formSearchPlace() {
-        return "formSearchPlace";
+        return "formSearchPlaces.html";
     }
 
     @PostMapping("/searchPlacesByRegion") 
     public String searchPlacesByRegion(Model model, @RequestParam String region) {
         model.addAttribute("places", this.placeRepository.findByRegion(region));
 
-        return "foundMovies.html";
+        return "foundPlaces.html";
     }
 
     @PostMapping("/searchPlacesByAddress") 
     public String searchPlacesByAddress(Model model, @RequestParam String address) {
         model.addAttribute("places", this.placeRepository.findByAddress(address));
 
-        return "foundMovies.html";
+        return "foundPlaces.html";
     }
 
     
