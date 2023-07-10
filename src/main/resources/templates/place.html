@@ -38,9 +38,6 @@
                     <p>Region: <a th:text="${place.region}">Roma</a></p>
                     <p>Address: <a th:text="${place.address}">via roma</a></p>
                     <p>Accessibility: <a th:boolean="${place.accessibility}">false</a></p>
-                    <div th:each="img : ${place.photos}">
-                        <img th:src="'data:image/jpeg;base64,'+${img.getImgData()}">
-                    </div>
                 </div>
             </div>
             <div class="row-6" th:unless="${place.reviews}"></div>
@@ -62,9 +59,9 @@
         <!--<img src="/images/login.JPG"
                 alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">-->
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div class="carousel-item active" th:each="img : ${place.photos}">
                 <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
-                <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" src="/images/IndexSlideshow/2.jpeg" alt="Second slide">
+                <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${img.getImgData()}" alt="Second slide">
             </div>
 
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
