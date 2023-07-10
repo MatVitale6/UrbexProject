@@ -28,6 +28,9 @@
                 <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
             </nav>
         </div>
+        <div th:if="${userDetails}">
+            <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
+        </div>
     </header>
 
     <div class="container text-center mt-3">

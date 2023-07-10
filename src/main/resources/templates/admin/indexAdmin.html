@@ -28,6 +28,9 @@
                     <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
                 </nav>
             </div>
+            <div th:if="${userDetails}">
+                <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
+            </div>
         </header>
 
         <main role="main" class="inner cover bg-success rounded-3">
@@ -36,9 +39,15 @@
             <p class="lead">
                 <a th:href="@{/places}" class="btn btn-lg btn-secondary">View Collections</a>
             </p>
-            <p class="lead">
-                <a th:href="@{admin/formNewPlace}">Aggiungi place</a>
-            </p>
+        </main>
+        <main role="main" class="inner cover bg-success rounded-3 mt-3">
+            <h1 class="lead">Available operations for admin user:<br></h1>
+                <li>
+                    <a th:href="@{admin/indexPlace}">Operazioni su luoghi</a>
+                </li>
+                <li>
+                    <a th:href="@{admin/managePhotographer}">Operazioni su fotografi</a>
+                </li>
         </main>
 
         <footer class="mastfoot mt-auto">
