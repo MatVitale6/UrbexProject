@@ -36,11 +36,24 @@
                 <form th:action="@{/searchPlacesByRegion}" method="post">
                     <input type="text" class="form-control form-control-lg mt-3 mb-3 mb-bg-success text-success" placeholder="Region" th:value="${region}" name="region" required="region"/>
                     <div class="pt1 mb-3 text-center">
+                    <button class="btn btn-outline-light btn-lg " type="submit">Search!</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <main role="main" class="inner cover bg-success rounded-3 mt-5">
+            <h1 class="cover-heading mb-3 mt-3">Find Urbex by Address:</h1>
+            <div class="form-group mt-3 text-center">
+                <form th:action="@{/searchPlacesByAddress}" method="post">
+                    <input type="text" class="form-control form-control-lg mt-3 mb-3 mb-bg-success text-success" placeholder="Address" th:value="${address}" name="address" required="address"/>
+                    <div class="pt1 mb-3 text-center">
                     <button class="btn btn-outline-light btn-lg" type="submit">Search!</button>
                     </div>
                 </form>
             </div>
         </main>
+
 
         <footer class="mastfoot mt-auto">
             <div class="inner">
