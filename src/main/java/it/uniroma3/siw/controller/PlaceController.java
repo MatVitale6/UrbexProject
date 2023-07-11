@@ -156,16 +156,16 @@ public class PlaceController {
 
     @GetMapping("/admin/addPhotoToPlace/{photoID}/{placeID}")
     public String addPhotoToPlace(@PathVariable("photoID") Long id1, @PathVariable("placeID") Long id2, Model model) {
-        model.addAttribute("artists", this.photoRepository.findAll());
+        model.addAttribute("photos", this.photoRepository.findAll());
         Place place = this.placeService.findPlaceByID(id2);
         Photo photo = this.photoRepository.findById(id1).get();
         place.getPhotos().add(photo);
         photo.setPlace(place);
         this.placeService.createNewPlace(place); //questa é la save
         this.photoRepository.save(photo);
-        model.addAttribute("photos", this.photoRepository.findAll());
         model.addAttribute("photos1", this.photoRepository.findAllByPlaceIsContaining(place));
         model.addAttribute("photos2", this.photoRepository.findAllByPlaceIsNotContaining(place));
+        model.addAttribute("place", place);
         model.addAttribute("photo", photo);
         return "/admin/managePhoto.html";
     }
