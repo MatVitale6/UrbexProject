@@ -53,19 +53,19 @@
                             <p class="text-success mb-0">Testo recensione:</p> <p style="text-indent: 0;"  th:text="${review.text}"> </p>
                         </div>
                         <div>
-                            <div th:if="${userDetails}">
+                           <!-- <div th:if="${userDetails}">
                                 <span th:if="${credentials.isAdmin() || review.author.id==credentials.user.id}">
                                     <a class="text-danger" th:href="'/deleteReview/' + ${review.id} + '/' + ${place.id}">Elimina Recensione</a>
                                 </span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div th:unless="${hasReview}">
-                        <div th:if="${credentials!=null && !hasReview}">
+                        <!--<div th:if="${credentials!=null && !hasReview}">
                             <button class="m-3 btn btn-outline-success btn-lg">
                                 <a th:href="'/formNewReview'+'/' + ${place.id} +'/'+ ${credentials.user.id}">Scrivi Recensione</a>
                             </button>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
         <!--<img src="/images/login.JPG"
                 alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">-->
         <div class="carousel-inner">
-            <div class="carousel-item active" th:each="img : ${place.photos}">
+            <div class="carousel-item active" th:each="img : ${place.thu}">
                 <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
                 <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${img.getImgData()}" alt="Second slide">
             </div>
