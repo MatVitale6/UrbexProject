@@ -59,6 +59,7 @@
                     <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
                         <a th:text="${place.name}">Forza Roma</a>
                         <p><a th:href="@{'/admin/formUpdatePhoto' + '/' + ${place.id}}">Add Photo!</a></p>
+                        <p><a th:href="@{'/deletePlace' + '/' + ${place.id}}">Remove place</a></p>
                     </div>
                 </div>
 
