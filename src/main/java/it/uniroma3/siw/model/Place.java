@@ -75,9 +75,9 @@ public class Place {
 		this.address = address;
 	}
 
-	public Photo getActorPhoto() {return thumbnail;}
+	public Photo getThumbnail() {return thumbnail;}
 
-	public void setActorPhoto(Photo photo) {this.thumbnail=photo;}
+	public void setThumbnail(Photo photo) {this.thumbnail=photo;}
 	public Set<Photo> getPhotos() {
 		return photos;
 	}

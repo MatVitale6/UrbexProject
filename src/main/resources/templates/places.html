@@ -54,7 +54,7 @@
 
         <div th:each="place : ${places}" class="carousel-item">
           <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
-          <!--<img class="d-block w-100" th:src="'data:image/jpeg;base64,'+${place.thumbnail.imageData}" alt="First slide">-->
+          <!--<img class="d-block w-100" th:src="'data:image/jpeg;base64,'+${place.getThumbnail().getImgData()}" alt="First slide">-->
           <img class="d-block w-100" src="/images/IndexSlideshow/1.jpeg" alt="First slide">
           <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
             <a th:href="@{'place' + '/' + ${place.id}}" th:text="${place.name}">Forza Roma</a>

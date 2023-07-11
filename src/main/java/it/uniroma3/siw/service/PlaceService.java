@@ -68,7 +68,7 @@ public class PlaceService {
             img.setFilename(file.getResource().getFilename());
             img.setData(file.getBytes());
             photoRepository.save(img);
-            place.setActorPhoto(img);
+            place.setThumbnail(img);
             this.placeRepository.save(place);
             model.addAttribute("place", place);
 
