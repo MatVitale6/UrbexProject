@@ -37,7 +37,7 @@ public class Place {
 	
 	private Boolean accessibility;
 	
-	@OneToMany
+	@OneToMany(mappedBy="place")
 	private Set<Photo> photos;
 	@OneToMany
 	private List<Review> reviews;

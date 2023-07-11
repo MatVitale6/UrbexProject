@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface PhotoRepository extends CrudRepository<Photo, Long> {
 
-    public List<Photo> findAllByPlaceIsContaining(Place place);
 
-    public List<Photo> findAllByPlaceIsNotContaining(Place place);
+    public List<Photo> findAllByPlaceIsNull();
+
+    public List<Photo> findAllByPlaceIsNotNull();
 }

@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div th:each="photo : ${photos}" class="carousel-item">
+                <div th:each="photo : ${photos1}" class="carousel-item">
                     <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
                     <img class="d-block w-100" src="/images/IndexSlideshow/2.jpeg" alt="Second slide">
                     <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
@@ -74,11 +74,6 @@
                 </a>
             </div>
         </div>
-        <footer class="mastfoot mt-5 text-center">
-            <div class="inner">
-                <p>Urbex Collection by <a href="https://www.instagram.com/kaumawa/?hl=it">Kaumawa</a> and <a href="https://www.instagram.com/gaspacioo/">Gaspacioo</a>.</p>
-            </div>
-        </footer>
     </div>
     <div class="container-sm col-6 mt-3">
 
@@ -89,16 +84,16 @@
                 <div class="carousel-item active">
                     <img class="d-block w-100" src="/images/ResourceNotFound_Background.jpeg" alt="First slide">
                     <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-                        <h5>Ready to add photos</h5>
-                        <p>Buttom for add to <a th:text="@{place.name}"></a></p>
+                        <h5>Ready to delete photos</h5>
+                        <p>Buttom for delete from <a th:text="@{place.name}"></a></p>
                     </div>
                 </div>
 
-                <div th:each="photo : ${photos}" class="carousel-item">
+                <div th:each="photo : ${photos2}" class="carousel-item">
                     <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
-                    <img class="d-block w-100" th:href="${photo.getImgData()}" alt="Second slide">
+                    <img class="d-block w-100" src="/images/ResourceNotFound_Background.jpeg" alt="First slide">
                     <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-                        <a th:href="@{'/admin/addPhotoToPlace' + '/' + ${photo.id} + '/' + ${place.id}}" th:text="${photo.filename}">Forza Roma</a>
+                        <a th:href="@{'/admin/removePhotoToPlace' + '/' + ${photo.id} + '/' + ${place.id}}" th:text="${photo.filename}">Forza Roma</a>
                     </div>
                 </div>
 
@@ -112,11 +107,11 @@
               </div>
               -->
                 <!-- fine for-->
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only"></span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only"></span>
                 </a>
