@@ -48,7 +48,7 @@
 
                 <div th:each="photo : ${photos1}" class="carousel-item">
                     <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
-                    <img class="d-block w-100" src="/images/IndexSlideshow/2.jpeg" alt="Second slide">
+                    <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${photo.getImgData()}" alt="Second slide">
                     <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
                         <a th:href="@{'/admin/addPhotoToPlace' + '/' + ${photo.id} + '/' + ${place.id}}" th:text="${photo.filename}">Forza Roma</a>
                     </div>
@@ -91,7 +91,7 @@
 
                 <div th:each="photo : ${photos2}" class="carousel-item">
                     <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
-                    <img class="d-block w-100" src="/images/ResourceNotFound_Background.jpeg" alt="First slide">
+                    <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${photo.getImgData()}" alt="Second slide">
                     <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
                         <a th:href="@{'/admin/removePhotoToPlace' + '/' + ${photo.id} + '/' + ${place.id}}" th:text="${photo.filename}">Forza Roma</a>
                     </div>
