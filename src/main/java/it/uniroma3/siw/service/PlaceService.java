@@ -1,6 +1,7 @@
 package it.uniroma3.siw.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -61,20 +62,22 @@ public class PlaceService {
     }
 
     @Transactional
-    public void newPlace(@Valid Place place, @RequestParam("file") MultipartFile[] file, Model model) throws IOException {
-        place.setPhotos(new HashSet<Photo>());
+    public String newPlace(@Valid Place place, @RequestParam("file") MultipartFile file, Model model) throws IOException {
+        if(!placeRepository.existsByAddressAndName(place.getAddress(), place.getName())) {
+            Photo img = new Photo();
+            img.setFilename(file.getResource().getFilename());
+            img.setData(file.getBytes());
+            photoRepository.save(img);
+            place.setActorPhoto(img);
+            this.placeRepository.save(place);
+            model.addAttribute("place", place);
 
-        for(MultipartFile f : file) {
-            System.out.println(f.toString());
+            return "place.html";
         }
-        for(MultipartFile f : file) {
-            Photo photo = new Photo();
-            photo.setFilename(f.getResource().getFilename());
-            photo.setData(f.getBytes());
-            this.photoRepository.save(photo);
-            place.getPhotos().add(photo);
+        else {
+            model.addAttribute("messaggioErrore", "Questo urbex esiste già");
+            return "admin/formNewPlace.html";
         }
-        this.placeRepository.save(place);
     }
 
     @Transactional
@@ -108,25 +111,25 @@ public class PlaceService {
     }
     */
 
-    @Transactional
-    public Place updatePlaceDetails(Long placeID, Place newPlace) {
-        Place oldPlace = this.placeRepository.findById(placeID).orElse(null);
-        
-        if(oldPlace != null) {
-            /* Magari aggiusta qua gaspa che bisogna accorpare delle classi */
-            oldPlace.setName(newPlace.getName());
-            oldPlace.setAddress(newPlace.getAddress());
-            oldPlace.setAccessibility(newPlace.getAccessibility());
-            oldPlace.setRegion(newPlace.getRegion());
-            
-            oldPlace.setAltitude(newPlace.getAltitude());
-            oldPlace.setLatitude(newPlace.getLatitude());
-            oldPlace.setLongitude(newPlace.getLongitude());
-
-            oldPlace.setDescription(newPlace.getDescription());
-        }
-        return oldPlace;
-    }
+//    @Transactional
+//    public Place updatePlaceDetails(Long placeID, Place newPlace) {
+//        Place oldPlace = this.placeRepository.findById(placeID).orElse(null);
+//
+//        if(oldPlace != null) {
+//            /* Magari aggiusta qua gaspa che bisogna accorpare delle classi */
+//            oldPlace.setName(newPlace.getName());
+//            oldPlace.setAddress(newPlace.getAddress());
+//            oldPlace.setAccessibility(newPlace.getAccessibility());
+//            oldPlace.setRegion(newPlace.getRegion());
+//
+//            oldPlace.setAltitude(newPlace.getAltitude());
+//            oldPlace.setLatitude(newPlace.getLatitude());
+//            oldPlace.setLongitude(newPlace.getLongitude());
+//
+//            oldPlace.setDescription(newPlace.getDescription());
+//        }
+//        return oldPlace;
+//    }
 
     @Transactional
     public void updatePlaceImage(Long placeID, MultipartFile[] file) throws IOException {

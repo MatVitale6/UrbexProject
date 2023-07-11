@@ -40,7 +40,6 @@
                     <p>Description: <a th:text="${place.description}">Sempre Forza ROMA!</a></p>
                     <p>Region: <a th:text="${place.region}">Roma</a></p>
                     <p>Address: <a th:text="${place.address}">via roma</a></p>
-                    <p>Accessibility: <a th:boolean="${place.accessibility}">false</a></p>
                 </div>
             </div>
             <div class="row-6" th:unless="${place.reviews}"></div>

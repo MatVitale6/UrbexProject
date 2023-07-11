@@ -4,13 +4,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -26,23 +22,24 @@ public class Place {
 	
 	private String description;
 	
-	private Double longitude;
-	private Double latitude;
-	private Double altitude;
+//	private Double longitude;
+//	private Double latitude;
+//	private Double altitude;
 	
 	@NotBlank
 	private String region;
 	@NotBlank
 	private String address;
-	
-	private Boolean accessibility;
+
+	@OneToOne
+	private Photo thumbnail;
 	
 	@OneToMany(mappedBy="place")
 	private Set<Photo> photos;
 	@OneToMany
 	private List<Review> reviews;
 
-	private boolean isApproved;
+	//private boolean isApproved;
 
 	//private User recommendedBy;
 	
@@ -65,24 +62,6 @@ public class Place {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Double getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-	public Double getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-	public Double getAltitude() {
-		return altitude;
-	}
-	public void setAltitude(Double altitude) {
-		this.altitude = altitude;
-	}
 	public String getRegion() {
 		return region;
 	}
@@ -95,12 +74,10 @@ public class Place {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Boolean getAccessibility() {
-		return accessibility;
-	}
-	public void setAccessibility(Boolean accessibility) {
-		this.accessibility = accessibility;
-	}
+
+	public Photo getActorPhoto() {return thumbnail;}
+
+	public void setActorPhoto(Photo photo) {this.thumbnail=photo;}
 	public Set<Photo> getPhotos() {
 		return photos;
 	}
@@ -112,12 +89,6 @@ public class Place {
 	}
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
-	}
-	public boolean isApproved() {
-		return isApproved;
-	}
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
 	}
 	/*
 	public User getRecommendedBy() {

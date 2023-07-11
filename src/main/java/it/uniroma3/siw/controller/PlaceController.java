@@ -60,7 +60,7 @@ public class PlaceController {
      * il button per l'approvazione di un place */
     @PostMapping("/admin/place")
     public String createPlace(@Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model,
-                             @RequestParam("file") MultipartFile[] file) throws IOException {
+                             @RequestParam("file") MultipartFile file) throws IOException {
         this.placeValidator.validate(place, bindingResult);
         model.addAttribute("credentials", this.getCredentials());
         if(!bindingResult.hasErrors()) {
