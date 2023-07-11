@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/cover.css">
     <link rel="stylesheet" href="/css/stile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
 
 <body>
@@ -38,20 +39,28 @@
                 <div th:if="${#fields.hasGlobalErrors()}">
                     <p th:each="err:${#fields.globalErrors()}"th:text="${err}">...</p>
                 </div>
+                <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Scrivi una recensione:</h3>
                 <div class="form-outline mt-3 mb-3 text-center">
                     <label class="form-label" for="titolo"></label> <input required type="text" class="form-control bg-success form-control-lg text-white" placeholder="Title" th:field="${review.title}" id="titolo"/>
                     <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
                 </div>
 
                 <div class="form-outline mt-3 mb-3 text-center">
-                    <label class="form-label" for="voto"></label> <input required type="range" class="form-range" min="1" max="5" th:field="${review.rating}" id="voto"/>
-                    <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
-                </div>
-
-                <div class="form-outline mt-3 mb-3 text-center">
                     <label class="form-label" for="descrizione"></label>
                 <textarea required type="text" class="form-control bg-success form-control-lg text-white" placeholder="Descriprion" th:field="${review.text}" id="descrizione"/>
                 </div>
+                <div>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"style="margin-left: 45px;"></i>
+                    <i class="fa-solid fa-star"style="margin-left: 45px;"></i>
+                    <i class="fa-solid fa-star"style="margin-left: 45px;"></i>
+                    <i class="fa-solid fa-star"style="margin-left: 45px;"></i>
+                    <div class="form-outline  mb-3 text-center">
+                        <label class="form-label" for="voto"></label> <input required type="range" class="form-range" min="1" max="5" th:field="${review.rating}" id="voto"/>
+                        <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+                    </div>
+                </div>
+
 
                 <div class="pt-1 mb-3 mt-3 text-center">
                     <button class="btn btn-outline-success btn-lg" type="submit">Review!</button>
