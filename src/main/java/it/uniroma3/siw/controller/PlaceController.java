@@ -90,7 +90,7 @@ public class PlaceController {
     @GetMapping(value ="/deletePlace/{placeID}")
     public String deletePlace(@PathVariable("placeID") Long placeID, Model model) {
         this.placeService.deletePlace(placeID);
-
+        
         return "redirect:place";
     }
     /*

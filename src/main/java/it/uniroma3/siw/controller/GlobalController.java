@@ -27,4 +27,9 @@ public class GlobalController {
     public String getResourceNotFound() {
         return "resourceNotFound.html";
     }
+
+    @GetMapping("/error")
+    public String getError() {
+        return "resourceNotFound.html";
+    }
 }
