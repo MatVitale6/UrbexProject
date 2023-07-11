@@ -73,8 +73,14 @@ public class PlaceController {
         }
     }
 
-    @PostMapping("/admin/updatePlaceImage/{placeId}")
-    public String updateMovieImage(@PathVariable("placeId") Long placeID, @RequestParam("file") MultipartFile[] file) throws IOException {
+    @GetMapping("/admin/formUpdatePhoto/{placeID}")
+    public String updatePhoto(@PathVariable("placeID")Long placeID, @RequestParam("file") MultipartFile[] file) throws IOException {
+        this.placeService.updatePlaceImage(placeID,file);
+        return "place.html";
+    }
+
+    @PostMapping("/admin/updatePlaceImage/{placeID}")
+    public String updateMovieImage(@PathVariable("placeID") Long placeID, @RequestParam("file") MultipartFile[] file) throws IOException {
         this.placeService.updatePlaceImage(placeID, file);
 
         return "place.html";
