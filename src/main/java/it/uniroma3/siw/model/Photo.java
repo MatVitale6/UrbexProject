@@ -5,11 +5,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Objects;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -29,6 +25,9 @@ public class Photo {
 
 	@Past
 	private LocalDate date;
+
+	@ManyToOne
+	private Place place;
 
 
 
@@ -68,6 +67,13 @@ public class Photo {
 		this.filename = filename;
 	}
 
+	public Place getPlace() {
+		return place;
+	}
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
 
 	@Override
 	public int hashCode() {

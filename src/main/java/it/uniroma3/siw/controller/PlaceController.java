@@ -2,6 +2,8 @@ package it.uniroma3.siw.controller;
 
 import java.io.IOException;
 
+import it.uniroma3.siw.model.Photo;
+import it.uniroma3.siw.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,6 +42,9 @@ public class PlaceController {
 
     @Autowired
     private CredentialsService credentialsService;
+
+    @Autowired
+    private PhotoRepository photoRepository;
 
 
     /* metodo getter per ottenere la form per la creazione di un nuovo place in attesa di approvazione */
@@ -136,10 +141,35 @@ public class PlaceController {
 
     @GetMapping(value="/admin/managePlaces")
     public String managePlaces(Model model) {
-        model.addAttribute("place", this.placeRepository.findAll());
+        model.addAttribute("places", this.placeRepository.findAll());
 
         return "admin/managePlaces.html";
     }
+
+    @GetMapping("/admin/managePhotosPlace/{placeID}")
+    public String managePhotos(@PathVariable("placeID") Long id, Model model) {
+        Place place = this.placeService.findPlaceByID(id);
+        model.addAttribute(place);
+        model.addAttribute("photos", this.photoRepository.findAll());
+        return "/admin/managePhoto.html";
+    }
+
+    @GetMapping("/admin/addPhotoToPlace/{photoID}/{placeID}")
+    public String addPhotoToPlace(@PathVariable("photoID") Long id1, @PathVariable("placeID") Long id2, Model model) {
+        model.addAttribute("artists", this.photoRepository.findAll());
+        Place place = this.placeService.findPlaceByID(id2);
+        Photo photo = this.photoRepository.findById(id1).get();
+        place.getPhotos().add(photo);
+        photo.setPlace(place);
+        this.placeService.createNewPlace(place); //questa é la save
+        this.photoRepository.save(photo);
+        model.addAttribute("photos", this.photoRepository.findAll());
+        model.addAttribute("photos1", this.photoRepository.findAllByPlaceIsContaining(place));
+        model.addAttribute("photos2", this.photoRepository.findAllByPlaceIsNotContaining(place));
+        model.addAttribute("photo", photo);
+        return "/admin/managePhoto.html";
+    }
+
     /*
     @GetMapping(value="/admin/notApprovedPlace")
     public String getNotApprovedPlace(Model model) {
