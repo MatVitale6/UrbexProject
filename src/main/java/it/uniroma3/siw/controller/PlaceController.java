@@ -91,7 +91,7 @@ public class PlaceController {
     public String deletePlace(@PathVariable("placeID") Long placeID, Model model) {
         this.placeService.deletePlace(placeID);
 
-        return "redirect:place.html";
+        return "redirect:place";
     }
     /*
     @PostMapping(value="/rejectPlace/{placeID}")
