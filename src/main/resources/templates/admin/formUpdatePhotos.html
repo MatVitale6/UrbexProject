@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Urbex Collection</title>
+  <link rel="stylesheet" href="/css/bootstrap.rtl.min.css">
+  <link rel="stylesheet" href="/css/cover.css">
+  <link rel="stylesheet" href="/css/stile.css">
+</head>
+<body class="text-center">
+
+<div class="background-container">
+  <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+      <div class="inner">
+        <h3 class="masthead-brand">Urbex</h3>
+        <nav class="nav nav-masthead justify-content-center">
+          <a class="nav-link active" href="/">Home</a>
+          <div class="px-2">
+            <div th:if="${userDetails != null}">
+              <a class="nav-link" href="/logout">Logout</a>
+            </div>
+            <div th:unless="${userDetails != null}">
+              <a class="nav-link" href="/login">Login</a>
+            </div>
+          </div>
+          <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
+        </nav>
+      </div>
+      <div th:if="${userDetails}">
+        <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
+      </div>
+    </header>
+
+    <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+      <form th:action="@{/admin/place}" method="POST" th:object="${place}" enctype="multipart/form-data">
+        <div th:if="${#fields.hasGlobalErrors()}">
+          <p th:each="err:${#fields.globalErrors()}"th:text="${err}">...</p>
+        </div>
+
+        <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Add Photo!</h3>
+
+
+        <div class="form-outline mb-3 text-center bg-success">
+          <label for="immagini" class="form-label"></label>
+          <input type="file" id="immagini" name="file" class="form-control form-control-lg bg-success text-white">
+        </div>
+
+
+        <div class="pt-1 mb-3 text-center">
+          <button class="btn btn-outline-success btn-lg" type="submit">Add Photo</button>
+        </div>
+
+      </form>
+    </div>
+
+    <footer class="mastfoot mt-auto">
+      <div class="inner">
+        <p>Urbex Collection by <a href="https://www.instagram.com/kaumawa/?hl=it">Kaumawa</a> and <a href="https://www.instagram.com/gaspacioo/">Gaspacioo</a>.</p>
+      </div>
+    </footer>
+  </div>
+</div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../../../assets/js/vendor/popper.min.js"></script>
+<script src="../../../../dist/js/bootstrap.min.js"></script>
+</body>
+</html>
