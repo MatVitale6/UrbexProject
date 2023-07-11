@@ -124,13 +124,20 @@ public class PlaceController {
 
     /* Metodo post per l'aggiornamento delle informazioni riguardo ad un place */
     @PostMapping(value="/admin/formUpdatePlace/{placeID}")
-    public String updatePlace(@PathVariable("placeID") Long placeID, @Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model) {
+    public String updatePlaceDetail(@PathVariable("placeID") Long placeID, @Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model) {
 
         if(!bindingResult.hasErrors()) {
             this.placeService.updatePlaceDetails(placeID, place);
         }
 
         return "redirect: /admin/formUpdatePlace" + placeID;
+    }
+
+    @PostMapping("/admin/updatePlacePhoto/{placeID}")
+    public String updatePlacePhoto(@PathVariable("placeID") Long placeID, @RequestParam("file") MultipartFile[] file) throws IOException {
+        this.placeService.updatePlaceImage(placeID, file);
+
+        return "place.html";
     }
 
     /* Pagine per l'utente admin per la gestione e visualizzazione dei luoghi */
@@ -144,14 +151,6 @@ public class PlaceController {
         model.addAttribute("places", this.placeRepository.findAll());
 
         return "admin/managePlaces.html";
-    }
-
-    @GetMapping("/admin/managePhotosPlace/{placeID}")
-    public String managePhotos(@PathVariable("placeID") Long id, Model model) {
-        Place place = this.placeService.findPlaceByID(id);
-        model.addAttribute(place);
-        model.addAttribute("photos", this.photoRepository.findAll());
-        return "/admin/managePhoto.html";
     }
 
     @GetMapping("/admin/addPhotoToPlace/{photoID}/{placeID}")

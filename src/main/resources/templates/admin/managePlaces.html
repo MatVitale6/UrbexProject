@@ -57,7 +57,7 @@
                     <img class="d-block w-100" src="/images/ResourceNotFound_Background.jpeg" alt="First slide">
                     <!--<a class="d-block w-100" th:href="${place.photos[0]}"></a>-->
                     <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-                        <a th:href="@{'/admin/managePhotosPlace' + '/' + ${place.id}}" th:text="${place.name}">Forza Roma</a>
+                        <a th:href="@{'/admin/formUpdatePlace' + '/' + ${place.id}}" th:text="${place.name}">Forza Roma</a>
                         <p th:text="${place.description}">Sempre Forza ROMA!</p>
                     </div>
                 </div>
