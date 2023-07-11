@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="/css/cover.css">
     <link rel="stylesheet" href="/css/stile.css">
+    <link rel="stylesheet" href="/css/error.css">
 </head>
 <body class="text-center">
 
@@ -32,14 +33,30 @@
                 <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
             </div>
         </header>
-
-        <main role="main" class="inner cover bg-success rounded-3 ">
-            <h1 class="cover-heading">URBEX COLLECTION</h1>
-            <p class="lead">Spiacente questa risorsa non esiste :(</p>
-            <p class="lead">
-                <a th:href="@{/places}" class="btn btn-lg btn-secondary">View Collections</a>
-            </p>
-        </main>
+            <div style="width: 800px;">
+                <div class="container">
+                  <div class="row"> 
+                  <div class="col-sm-12 ">
+                  <div class="col-sm-10 col-sm-offset-1  text-center">
+                  <div class="four_zero_four_bg">
+                    <h1 class="text-center bg-success">404</h1>
+                  
+                  
+                  </div>
+                  
+                  <div class="contant_box_404">
+                  <div >
+                  <h3 class="h2 bg-success">Ma dove sei finito?</h3>
+                  <p class="bg-success">la pagina che stai cercando non esiste :(</p>
+                  </div>
+                  
+                  <a href="/" class="link_404 bg-success rounded-3">Go to Home</a>
+                </div>
+                  </div>
+                  </div>
+                  </div>
+                </div>
+            </div>
 
         <footer class="mastfoot mt-auto">
             <div class="inner">
