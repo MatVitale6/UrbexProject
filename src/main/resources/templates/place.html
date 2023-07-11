@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Urbex Collection</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/leaflet.css">
     <link rel="stylesheet" href="/css/stile.css">
+
+
 </head>
 
 <body class="container-fluid">
@@ -32,7 +35,7 @@
             </div>
         </header>
 
-        <div class="container-xl d-flex align-items-center flex-row h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+        <div class="container-xl align-items-center flex-row h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
             <div class="row-6" th:if="${place}">
                 <h3 th:text="${place.name}" class="border bg-success p-3 rounded-3">Forza Roma</h3>
                 <div class="rounded-3 border p-3">
@@ -40,6 +43,11 @@
                     <p class="text-success">Region: <a class="text-light" th:text="${place.region}">Roma</a></p>
                     <p class="text-success">Address: <a class="text-light" th:text="${place.address}">via roma</a></p>
                 </div>
+
+                <div class="pt-3">
+                    <div id="map"></div>
+                </div>
+
                 <div class="row-6" th:unless="${place.reviews}"></div>
                 <div class="row-6 mt-3">
                     <p class="border bg-success p-3 rounded-3 p-3">Cosa ne pensano gli utenti:</p>
@@ -104,5 +112,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/leaflet.js"></script>
+<script src="/js/mappe.js"></script>
 </body>
 </html>

@@ -100,3 +100,6 @@ label{
         float: right;
     }
 }
+#map {
+    height: 150px;
+}
