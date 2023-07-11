@@ -6,14 +6,18 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Photo;
 import it.uniroma3.siw.model.Place;
 import it.uniroma3.siw.model.Review;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.PhotoRepository;
 import it.uniroma3.siw.repository.PlaceRepository;
 import it.uniroma3.siw.repository.ReviewRepository;
@@ -35,6 +39,9 @@ public class PlaceService {
 
     @Autowired
     private ReviewRepository reviewRepository;
+
+    @Autowired
+    private CredentialsService credentialsService;
 
     @Transactional
     public void createNewPlace(Place place) {
@@ -70,14 +77,32 @@ public class PlaceService {
             photoRepository.save(img);
             place.setThumbnail(img);
             this.placeRepository.save(place);
+            model.addAttribute("hasReview", this.existsReviewByAuthorAndPlace(this.getCredentials().getUser().getId(), place.getId()));
             model.addAttribute("place", place);
-
             return "place.html";
         }
         else {
             model.addAttribute("messaggioErrore", "Questo urbex esiste già");
             return "admin/formNewPlace.html";
         }
+    }
+
+    	private Credentials getCredentials() {
+		if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
+			Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+			return credentials;
+		}
+		return null;
+	}
+
+    @Transactional
+    public boolean existsReviewByAuthorAndPlace(Long userID, Long placeID) {
+        User user = userRepository.findById(userID).orElse(null);
+        Place place = placeRepository.findById(placeID).orElse(null);
+
+        return this.reviewRepository.existsByAuthorAndPlace(user, place);
     }
 
     @Transactional

@@ -62,7 +62,7 @@ public class PlaceController {
     public String createPlace(@Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model,
                              @RequestParam("file") MultipartFile file) throws IOException {
         this.placeValidator.validate(place, bindingResult);
-
+        
         if(!bindingResult.hasErrors()) {
             return this.placeService.newPlace(place, file, model);
         }                       
