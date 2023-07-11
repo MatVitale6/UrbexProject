@@ -41,16 +41,33 @@
                     <p>Region: <a th:text="${place.region}">Roma</a></p>
                     <p>Address: <a th:text="${place.address}">via roma</a></p>
                 </div>
-            </div>
-            <div class="row-6" th:unless="${place.reviews}"></div>
-            <div class="row-6">
-                <p class="border bg-success p-3 rounded-3 p-3">Le recensioni recensite:</p>
-                <li class="rounded-3 bg-success border p-3" th:each="review : ${place.reviews}">
-                    <a th:text="${review.title + ' (' + review.rating + ')' + '[' + review.author.name + ']'}">Recensione</a>
-                    <a th:text="${review.text}">Descrizione</a>
-                </li>
-                <a th:href="@{'/formNewReview' + '/' + ${place.id} + '/' + ${credentials.user.id}}"
-                   class="m-3 btn btn-outline-success btn-lg">Scrivi Recensione</a>
+                <div class="row-6" th:unless="${place.reviews}"></div>
+                <div class="row-6 mt-3">
+                    <p class="border bg-success p-3 rounded-3 p-3">Cosa ne pensano gli utenti:</p>
+                    <div class="rounded-3  border p-3 mb-1" th:each="review : ${place.reviews}">
+                        <div>
+                            <a class="text-success" >Titolo:</a> <a th:text="${review.title}"> </a>
+                            <a class="text-success p-5" >Voto:</a> <a th:text="${review.rating}"> </a>
+                        </div>
+                        <div>
+                            <p class="text-success mb-0">Testo recensione:</p> <p style="text-indent: 0;"  th:text="${review.text}"> </p>
+                        </div>
+                        <div>
+                            <div th:if="${userDetails}">
+                                <span th:if="${credentials.isAdmin() || review.author.id==credentials.user.id}">
+                                    <a class="text-danger" th:href="'/deleteReview/' + ${review.id} + '/' + ${place.id}">Elimina Recensione</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:unless="${hasReview}">
+                        <div th:if="${credentials!=null && !hasReview}">
+                            <button class="m-3 btn btn-outline-success btn-lg">
+                                <a th:href="'/formNewReview'+'/' + ${place.id} +'/'+ ${credentials.user.id}">Scrivi Recensione</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
