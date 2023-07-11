@@ -46,11 +46,14 @@
                     <p class="border bg-success p-3 rounded-3 p-3">Cosa ne pensano gli utenti:</p>
                     <div class="rounded-3  border p-3 mb-1" th:each="review : ${place.reviews}">
                         <div>
-                            <a class="text-success" >Titolo:</a> <a th:text="${review.title}"> </a>
-                            <a class="text-success p-5" >Voto:</a> <a th:text="${review.rating}"> </a>
+                            <a class="text-success" >Title:</a> <a th:text="${review.title}"> </a>
+                            <a class="text-success p-5" >Rating:</a> <a th:text="${review.rating}"> </a>
                         </div>
                         <div>
-                            <p class="text-success mb-0">Testo recensione:</p> <p style="text-indent: 0;"  th:text="${review.text}"> </p>
+                            <a class="text-success mb-0">User:</a> <a th:text="${review.author.name}"></a>
+                        </div>
+                        <div>
+                            <p class="text-success mb-0">Review:</p> <p style="text-indent: 0;"  th:text="${review.text}"> </p>
                         </div>
                         <div>
                            <div th:if="${userDetails}">
@@ -79,7 +82,7 @@
 
 
 
-    <div class="col-sm-6 px-2 d-none d-sm-block">
+    <div class="col-sm-6 px-2 d-none d-sm-block mt-5 ">
         <!--<img src="/images/login.JPG"
                 alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">-->
         <div class="carousel-inner">

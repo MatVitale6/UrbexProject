@@ -95,7 +95,11 @@ body {
     padding: .75rem 1.25rem;
     font-weight: 700;
 }
-
+.carousel-container {
+    max-height: 200px;
+    max-width: 300px; /* Imposta la larghezza massima desiderata */
+    margin: 0 auto; /* Centra il contenitore */
+}
 
 /*
  * Footer
@@ -103,3 +107,4 @@ body {
 .mastfoot {
     color: rgba(255, 255, 255, .5);
 }
+
