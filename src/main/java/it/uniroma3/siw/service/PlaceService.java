@@ -1,8 +1,6 @@
 package it.uniroma3.siw.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,7 +116,7 @@ public class PlaceService {
             userRepository.save(rvw.getAuthor());
             reviewRepository.delete(rvw);
         }
-        this.placeRepository.delete(place);
+        placeRepository.delete(place);
 
         return place;
     }
