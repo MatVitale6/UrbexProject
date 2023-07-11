@@ -6,6 +6,7 @@
     <title>Urbex Collection</title>
     <link rel="stylesheet" href="/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="/css/cover.css">
+    <link rel="stylesheet" href="/css/leaflet.css">
     <link rel="stylesheet" href="/css/stile.css">
 </head>
 <body class="text-center">
@@ -68,6 +69,21 @@
                     </div>
 
                     <div class="form-outline mb-3 text-center">
+                        <label for="latitude" class="form-label">Latitude</label>
+                        <input type="text" id="latitude" name="latitude" class="form-control form-control-lg bg-success text-white" placeholder="Latitude" required />
+                    </div>
+
+                    <div class="form-outline mb-3 text-center">
+                        <label for="longitude" class="form-label">Longitude</label>
+                        <input type="text" id="longitude" name="longitude" class="form-control form-control-lg bg-success text-white" placeholder="Longitude" required />
+                    </div>
+
+                    <div class="form-outline mb-3 text-center">
+                        <label for="map" class="form-label">Map</label>
+                        <div id="map" style="height: 400px;"></div>
+                    </div>
+
+                    <div class="form-outline mb-3 text-center">
                         <label for="immagini" class="form-label"></label>
                         <input type="file" id="immagini" name="file">
                     </div>
@@ -95,5 +111,33 @@
 <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src="../../../../assets/js/vendor/popper.min.js"></script>
 <script src="../../../../dist/js/bootstrap.min.js"></script>
+<script src="/js/leaflet.js"></script>
+<script>
+    // Inizializza la mappa
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // Aggiungi il layer della mappa
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+    }).addTo(map);
+
+    // Aggiungi un marker interattivo sulla mappa
+    var marker = L.marker([51.5, -0.09], {
+        draggable: true // Permette all'amministratore di spostare il marker
+    }).addTo(map);
+
+    // Aggiungi un evento per ottenere le coordinate del marker quando viene spostato
+    marker.on('dragend', function (event) {
+        var marker = event.target;
+        var position = marker.getLatLng();
+        var latitude = position.lat;
+        var longitude = position.lng;
+
+        // Aggiorna i valori delle coordinate nei campi di input
+        document.getElementById('latitude').value = latitude;
+        document.getElementById('longitude').value = longitude;
+    });
+</script>
 </body>
 </html>

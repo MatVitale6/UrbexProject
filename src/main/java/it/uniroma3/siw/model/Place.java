@@ -22,8 +22,8 @@ public class Place {
 	
 	private String description;
 	
-//	private Double longitude;
-//	private Double latitude;
+	private Double longitude;
+	private Double latitude;
 //	private Double altitude;
 	
 	@NotBlank

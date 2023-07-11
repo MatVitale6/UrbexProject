@@ -113,6 +113,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="/js/leaflet.js"></script>
-<script src="/js/mappe.js"></script>
+<script>
+    // Recupera le coordinate latitudine e longitudine dal modello del posto aggiunto
+    var latitude = /* recupera il valore della latitudine dal modello */;
+    var longitude = /* recupera il valore della longitudine dal modello */;
+
+    // Inizializza la mappa
+    var map = L.map('map').setView([latitude, longitude], 13);
+
+    // Aggiungi il layer della mappa
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+    }).addTo(map);
+
+    // Aggiungi un marker fisso sulla mappa per visualizzare la posizione
+    var marker = L.marker([latitude, longitude]).addTo(map);
+</script>
+
 </body>
 </html>
