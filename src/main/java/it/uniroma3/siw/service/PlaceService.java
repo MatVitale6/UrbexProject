@@ -67,6 +67,15 @@ public class PlaceService {
     }
 
     @Transactional
+    public Place findById(Long id) throws Exception {
+        Place place = this.placeRepository.findById(id).orElse(null);
+        if(place == null) {
+            throw new Exception("luogo non trovato");
+        }
+        else return place;
+    }
+
+    @Transactional
     public void newPlace(@Valid Place place, @RequestParam("file") MultipartFile file, Model model) throws IOException {
         if(!placeRepository.existsByAddressAndName(place.getAddress(), place.getName())) {
             Photo img = new Photo();

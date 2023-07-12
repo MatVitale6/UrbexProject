@@ -2,8 +2,7 @@ package it.uniroma3.siw.controller;
 
 import java.io.IOException;
 
-import it.uniroma3.siw.model.Photo;
-import it.uniroma3.siw.repository.PhotoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,9 +42,6 @@ public class PlaceController {
     @Autowired
     private CredentialsService credentialsService;
 
-    @Autowired
-    private PhotoRepository photoRepository;
-
 
     /* metodo getter per ottenere la form per la creazione di un nuovo place in attesa di approvazione */
     @GetMapping(value="/admin/formNewPlace")
@@ -73,10 +69,16 @@ public class PlaceController {
         }
     }
 
-    @GetMapping("/admin/formUpdatePlace/{placeID}")
+    @GetMapping(value = "/admin/formUpdatePlace/{placeID}")
     public String formUpdatePlace(@PathVariable("placeID") Long placeID, Model model) throws IOException {
-        model.addAttribute("place", placeRepository.findById(placeID).get());
-        return "admin/formUpdatePlace.html";
+        Place place;
+        try {
+            place = this.placeService.findById(placeID);
+            model.addAttribute("place", place);
+            return "admin/formUpdatePlace.html";
+        } catch (Exception e) {
+            return "/error.html";
+        }
     }
 
     @PostMapping("/admin/updatePlaceDetails/{placeID}")
@@ -84,7 +86,7 @@ public class PlaceController {
         if(!bindingResult.hasErrors()) {
             this.placeService.updatePlaceDetails(placeID, place);
         }
-        return "redirect:/place/"+placeID;
+        return "redirect:/admin/formUpdatePlace/"+placeID;
     }
 
     @PostMapping("/admin/updatePlacePhoto/{placeID}")
