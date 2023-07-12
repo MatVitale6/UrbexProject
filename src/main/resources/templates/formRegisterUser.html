@@ -44,9 +44,7 @@
                         <div class="form-outline mb-3 text-center">
                             <input type="email" id="email" class="form-control form-control-lg bg-success text-white" placeholder="Email address" required th:field="${user.email}"/>
                             <label class="form-label" for="email"></label>
-                            <span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}" th:style="'color:red'">Errore</span>
                         </div>
-
                         <div class="form-outline mb-3 text-center">
                             <input type="text" id="username" class="form-control form-control-lg bg-success text-white" placeholder="Username" required th:field="${credentials.username}"/>
                             <label class="form-label" for="username"></label>
@@ -57,6 +55,9 @@
                             <input type="password" id="password" class="form-control form-control-lg bg-success text-white" placeholder="Password" required th:field="${credentials.password}"/>
                             <label class="form-label" for="password"></label>
                             <span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}" th:style="'color:red'"></span>
+                        </div>
+                        <div>
+                            <span th:if="${messaggioErrore}" th:text="${messaggioErrore}">Error</span>
                         </div>
                         <div class="pt-1 mb-3 text-center">
                             <button class="btn btn-outline-success btn-lg" type="submit">Register</button>

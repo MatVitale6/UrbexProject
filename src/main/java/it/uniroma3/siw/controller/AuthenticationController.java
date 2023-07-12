@@ -87,6 +87,7 @@ public class AuthenticationController {
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
+		model.addAttribute("messaggioErrore", "Questo utente esiste già");
         return "formRegisterUser.html";
     }
 }
