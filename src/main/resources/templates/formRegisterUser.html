@@ -44,7 +44,7 @@
                         <div class="form-outline mb-3 text-center">
                             <input type="email" id="email" class="form-control form-control-lg bg-success text-white" placeholder="Email address" required th:field="${user.email}"/>
                             <label class="form-label" for="email"></label>
-                            <span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}" th:style="'color:red'">
+                            <span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}" th:style="'color:red'">Errore</span>
                         </div>
 
                         <div class="form-outline mb-3 text-center">
@@ -61,10 +61,8 @@
                         <div class="pt-1 mb-3 text-center">
                             <button class="btn btn-outline-success btn-lg" type="submit">Register</button>
                         </div>
-
                         <!--<p class="small mb-5 pb-lg-2"><a class="text-muted" href="#!">Forgot password?</a></p>-->
                         <p>Have you an account? <a href="formLogin.html" class="link-info">Log in here</a></p>
-
                     </form>
 
                 </div>

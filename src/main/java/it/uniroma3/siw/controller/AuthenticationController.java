@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.repository.UserRepository;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.UserService;
 import jakarta.validation.Valid;
@@ -26,6 +27,8 @@ public class AuthenticationController {
 
     @Autowired
 	private UserService userService;
+	@Autowired
+	private UserRepository userRepository;
 	
 	@GetMapping(value = "/register") 
 	public String showRegisterForm (Model model) {
@@ -75,13 +78,15 @@ public class AuthenticationController {
                  Model model) {
 
 		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-        if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+		String email = user.getEmail();
+		User existingUser = userRepository.findByEmail(email);
+        if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors() && existingUser == null) {
             userService.saveUser(user);
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
-        return "registerUser";
+        return "formRegisterUser.html";
     }
 }
