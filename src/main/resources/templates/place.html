@@ -90,9 +90,7 @@
 
 
     <div class="col-sm-6 px-2 d-none d-sm-block mt-5 ">
-        <!--<img src="/images/login.JPG"
-                alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">-->
-        <div class="carousel-inner">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">        <div class="carousel-inner">
             <div class="carousel-item active">
                 <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
                 <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${place.getThumbnail().getImgData()}" alt="Second slide">
@@ -110,7 +108,7 @@
                 <span class="sr-only"></span>
             </a>
         </div>
-
+        </div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
