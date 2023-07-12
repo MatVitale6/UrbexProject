@@ -34,7 +34,7 @@
     </header>
 
     <div class="container-sm text-center mt-3">
-        <h2>Ecco i luoghi che conosciamo!</h2>
+        <h2>Here is all the places on the website</h2>
 
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <!--<ol class="carousel-indicators">
@@ -46,8 +46,8 @@
                 <!-- qui va il for con i luoghi -->
                 <div class="carousel-item active">
                     <img class="d-block w-100" src="/images/ResourceNotFound_Background.jpeg" alt="First slide">
-                    <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-                        <h5>Here our places</h5>
+                    <div class="carousel-caption d-none d-md-block text-bg-success rounded-3 border border-dark">
+                        <h5>Here is our places</h5>
                         <p>Choose one operation!</p>
                     </div>
                 </div>
@@ -56,10 +56,10 @@
                     <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
                     <img class="w-100 vh-100" th:src="'data:image/jpeg;base64,'+${place.getThumbnail().getImgData()}" alt="Second slide">
                     <!--<a class="d-block w-100" th:href="${place.photos[0]}"></a>-->
-                    <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-                        <a th:text="${place.name}">Forza Roma</a>
-                        <p><a th:href="@{'/admin/formUpdatePlace' + '/' + ${place.id}}">Aggiorna luogo</a></p>
-                        <p><a th:href="@{'/deletePlace' + '/' + ${place.id}}">Rimuovi luogo</a></p>
+                    <div class="carousel-caption d-none d-md-block text-bg-success rounded-3 border border-dark" >
+                        <h3 th:text="${place.name}">Forza Roma</h3>
+                        <p><a class="btn btn-outline-light btn-sm" th:href="@{'/admin/formUpdatePlace' + '/' + ${place.id}}">Update place</a></p>
+                        <p><a class="btn btn-outline-light btn-sm" th:href="@{'/deletePlace' + '/' + ${place.id}}">Remove place</a></p>
                     </div>
                 </div>
 

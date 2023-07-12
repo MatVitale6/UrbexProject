@@ -39,7 +39,7 @@
                 <div th:if="${#fields.hasGlobalErrors()}">
                     <p th:each="err:${#fields.globalErrors()}"th:text="${err}">...</p>
                 </div>
-                <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Scrivi una recensione:</h3>
+                <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Write a review:</h3>
                 <div class="form-outline mt-3 mb-3 text-center">
                     <label class="form-label" for="titolo"></label> <input required type="text" class="form-control bg-success form-control-lg text-white" placeholder="Title" th:field="${review.title}" id="titolo"/>
                     <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
