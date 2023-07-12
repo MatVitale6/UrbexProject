@@ -74,8 +74,8 @@
              alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">-->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
-                <img class="w-100 vh-100" style="object-fit: cover; object-position: left;" src="/images/IndexSlideshow/2.jpeg" alt="Second slide">
+                <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${place.getThumbnail().getImgData()}" alt="Second slide">
+
             </div>
 
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

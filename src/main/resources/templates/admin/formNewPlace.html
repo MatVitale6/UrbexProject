@@ -44,13 +44,13 @@
                     <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">New Place</h3>
 
                     <div class="row mb-3">
-                        <div class="form-group col-sm-6 text-center">
+                        <div class="form-outline col-sm-6 text-center">
                             <input type="text" id="nome" class="form-control form-control-lg bg-success text-white" placeholder="Name" required th:field="${place.name}"/>
                             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                             <label class="form-label" for="nome"></label>
                         </div>
 
-                        <div class="form-group col-sm-6 text-center">
+                        <div class="form-outline col-sm-6 text-center">
                             <input type="text" id="regione" class="form-control form-control-lg bg-success text-white" placeholder="Region" required th:field="${place.region}"/>
                             <span th:if="${#fields.hasErrors('region')}" th:errors="*{region}"></span>
                             <label class="form-label" for="regione"></label>
