@@ -52,7 +52,7 @@ public class AuthConfiguration {
         httpSecurity
         .csrf().and().cors().disable()
         .authorizeHttpRequests()
-        .requestMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/css/**", "/images/**","/formSearchPlaces","favicon.ico", "/place/**", "/places", "/place").permitAll()
+        .requestMatchers(HttpMethod.GET, "/", "/index", "/login", "/register", "/css/**", "/images/**","/js/**","/formSearchPlaces","favicon.ico", "/place/**", "/places", "/place").permitAll()
         .requestMatchers(HttpMethod.POST, "/login", "/register", "/place/**", "/searchPlacesByRegion","/searchPlacesByAddress").permitAll()
         .requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
         .requestMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(ADMIN_ROLE)
