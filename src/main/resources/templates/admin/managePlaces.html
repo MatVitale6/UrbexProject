@@ -58,8 +58,8 @@
                     <!--<a class="d-block w-100" th:href="${place.photos[0]}"></a>-->
                     <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
                         <a th:text="${place.name}">Forza Roma</a>
-                        <p><a th:href="@{'/admin/formUpdatePhoto' + '/' + ${place.id}}">Add Photo!</a></p>
-                        <p><a th:href="@{'/deletePlace' + '/' + ${place.id}}">Remove place</a></p>
+                        <p><a th:href="@{'/admin/formUpdatePlace' + '/' + ${place.id}}">Aggiorna luogo</a></p>
+                        <p><a th:href="@{'/deletePlace' + '/' + ${place.id}}">Rimuovi luogo</a></p>
                     </div>
                 </div>
 

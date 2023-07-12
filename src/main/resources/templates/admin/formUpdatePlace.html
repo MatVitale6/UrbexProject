@@ -31,92 +31,29 @@
             <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
         </div>
     </header>
-<div class="flex-row">
-    <div class="container-sm col-6 mt-3">
+    <h1>Aggiorna film</h1>
+    <div th:if="${place}">
+       <div>
+           <span th:text="${place.name}">Up!</span>
+           <span th:text="${place.address}">Up!</span>
+           <span th:text="'(' + ${place.region} + ')'">2000</span>
+       </div>
 
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+       <div th:each="img: ${place.photos}">
+           <img th:src="'data:image/jpeg;base64,'+${img.getImgData()}">
+           <a th:href="'/deleteImage/'+ ${place.id} + '/' + ${img.id}">Elimina immagine</a>
+       </div>
+       <div>
+           <form method="POST" th:action="@{'/admin/updatePlacePhoto/'+${place.id}}" enctype="multipart/form-data">
+               <label>Aggiungi immagini: </label>
+               <input type="file" name="file">
+               <button type="submit">Conferma</button>
+           </form>
+       </div>
 
-            <div class="carousel-inner rounded-3">
-                <!-- qui va il for con i luoghi -->
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="/images/ResourceNotFound_Background.jpeg" alt="First slide">
-                    <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-                        <h5>Ready to add photos</h5>
-                        <p>Buttom for add to <a th:text="@{place.name}"></a></p>
-                    </div>
-                </div>
 
-                <div th:each="photo : ${photos1}" class="carousel-item">
-                    <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
-                    <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${photo.getImgData()}" alt="Second slide">
-                    <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-                        <a th:href="@{'/admin/addPhotoToPlace' + '/' + ${photo.id} + '/' + ${place.id}}" th:text="${photo.filename}">Forza Roma</a>
-                    </div>
-                </div>
 
-                <!--
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="/images/IndexSlideshow/2.jpeg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="/images/IndexSlideshow/3.jpeg" alt="Third slide">
-                </div>
-              </div>
-              -->
-                <!-- fine for-->
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only"></span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only"></span>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="container-sm col-6 mt-3">
 
-        <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
-
-            <div class="carousel-inner rounded-3">
-                <!-- qui va il for con i luoghi -->
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="/images/ResourceNotFound_Background.jpeg" alt="First slide">
-                    <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-                        <h5>Ready to delete photos</h5>
-                        <p>Buttom for delete from <a th:text="@{place.name}"></a></p>
-                    </div>
-                </div>
-
-                <div th:each="photo : ${photos2}" class="carousel-item">
-                    <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
-                    <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${photo.getImgData()}" alt="Second slide">
-                    <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
-                        <a th:href="@{'/admin/removePhotoToPlace' + '/' + ${photo.id} + '/' + ${place.id}}" th:text="${photo.filename}">Forza Roma</a>
-                    </div>
-                </div>
-
-                <!--
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="/images/IndexSlideshow/2.jpeg" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="/images/IndexSlideshow/3.jpeg" alt="Third slide">
-                </div>
-              </div>
-              -->
-                <!-- fine for-->
-                <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only"></span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only"></span>
-                </a>
-            </div>
-        </div>
         <footer class="mastfoot mt-5 text-center">
             <div class="inner">
                 <p>Urbex Collection by <a href="https://www.instagram.com/kaumawa/?hl=it">Kaumawa</a> and <a href="https://www.instagram.com/gaspacioo/">Gaspacioo</a>.</p>

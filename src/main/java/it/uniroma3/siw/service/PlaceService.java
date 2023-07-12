@@ -134,26 +134,6 @@ public class PlaceService {
     }
     */
 
-//    @Transactional
-//    public Place updatePlaceDetails(Long placeID, Place newPlace) {
-//        Place oldPlace = this.placeRepository.findById(placeID).orElse(null);
-//
-//        if(oldPlace != null) {
-//            /* Magari aggiusta qua gaspa che bisogna accorpare delle classi */
-//            oldPlace.setName(newPlace.getName());
-//            oldPlace.setAddress(newPlace.getAddress());
-//            oldPlace.setAccessibility(newPlace.getAccessibility());
-//            oldPlace.setRegion(newPlace.getRegion());
-//
-//            oldPlace.setAltitude(newPlace.getAltitude());
-//            oldPlace.setLatitude(newPlace.getLatitude());
-//            oldPlace.setLongitude(newPlace.getLongitude());
-//
-//            oldPlace.setDescription(newPlace.getDescription());
-//        }
-//        return oldPlace;
-//    }
-
     @Transactional
     public void updatePlaceImage(Long placeID, MultipartFile[] file) throws IOException {
         Place place = this.placeRepository.findById(placeID).orElse(null);
@@ -179,5 +159,16 @@ public class PlaceService {
             this.placeRepository.save(oldPlace);
         }
         return oldPhoto;
+    }
+
+    @Transactional
+    public Place updatePlaceDetails(Long placeID, @Valid Place newPlace) {
+        Place oldPlace = this.placeRepository.findById(placeID).orElse(null);
+        if(oldPlace != null) {
+            oldPlace.setName(newPlace.getName());
+            oldPlace.setDescription(newPlace.getDescription());
+            placeRepository.save(oldPlace);
+        }
+        return oldPlace;
     }
 }
