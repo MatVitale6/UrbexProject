@@ -82,6 +82,9 @@
 
             <div th:each="img : ${place.getPhotos()}" class="carousel-item">
                 <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${img.getImgData()}" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block text-bg-success rounded-3">
+                    <p><a th:href="@{'/deletePhoto/' + ${place.id} + '/' + ${img.id}}">Delete Photo</a></p>
+                </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
