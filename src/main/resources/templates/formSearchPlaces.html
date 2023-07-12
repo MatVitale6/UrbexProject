@@ -16,7 +16,7 @@
             <div class="inner">
                 <h3 class="masthead-brand">Urbex</h3>
                 <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="/">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                     <div class="px-2">
                         <div th:if="${userDetails != null}">
                             <a class="nav-link" href="/logout">Logout</a>
@@ -25,7 +25,7 @@
                             <a class="nav-link" href="/login">Login</a>
                         </div>
                     </div>
-                    <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
+                    <a class="nav-link active" th:href="@{/formSearchPlaces}">Search</a>
                 </nav>
                 <div th:if="${userDetails}">
                     <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
