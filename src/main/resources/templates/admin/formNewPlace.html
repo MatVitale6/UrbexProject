@@ -34,8 +34,8 @@
             </div>
         </header>
 
-        <div class="bg-dark rounded-3">
-            <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+        <div class="bg-dark rounded-3 overflow-auto">
+            <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-xl-0 mt-xl-n5">
                 <form th:action="@{/admin/place}" method="POST" th:object="${place}" enctype="multipart/form-data">
                     <div th:if="${#fields.hasGlobalErrors()}">
                         <p th:each="err:${#fields.globalErrors()}"th:text="${err}">...</p>
@@ -69,25 +69,28 @@
                     </div>
 
                     <div class="form-outline mb-3 text-center">
-                        <label for="latitude" class="form-label">Latitude</label>
-                        <input type="text" id="latitude" name="latitude" class="form-control form-control-lg bg-success text-white" placeholder="Latitude" required />
-                    </div>
-
-                    <div class="form-outline mb-3 text-center">
-                        <label for="longitude" class="form-label">Longitude</label>
-                        <input type="text" id="longitude" name="longitude" class="form-control form-control-lg bg-success text-white" placeholder="Longitude" required />
-                    </div>
-
-                    <div class="form-outline mb-3 text-center">
-                        <label for="map" class="form-label">Map</label>
+                        <label for="map" class="form-label">Move the marker, now it's over our university!</label>
                         <div id="map" style="height: 400px;"></div>
                     </div>
 
-                    <div class="form-outline mb-3 text-center">
+
+                    <label>You can also write geographical coordinates:</label>
+                    <div class="row mb-3">
+                        <div class="form-group col-6 text-center">
+                            <label for="latitude" class="form-label"></label>
+                            <input type="text" id="latitude" name="latitude" class="form-control form-control-lg bg-success text-white" placeholder="Latitude" required />
+                        </div>
+
+                        <div class="form-group col-6 text-center">
+                            <label for="longitude" class="form-label"></label>
+                            <input type="text" id="longitude" name="longitude" class="form-control form-control-lg bg-success text-white" placeholder="Longitude" required />
+                        </div>
+                    </div>
+                    <div class="form-outline text-center pt-3">
                         <label for="immagini" class="form-label"></label>
                         <input type="file" id="immagini" name="file">
                     </div>
-                <div class="pt-1 mb-3 text-center">
+                <div class="pt-3 mb-3 text-center">
                     <button class="btn btn-outline-success btn-lg" type="submit">Add Place</button>
                 </div>
 
@@ -114,7 +117,7 @@
 <script src="/js/leaflet.js"></script>
 <script>
     // Inizializza la mappa
-    var map = L.map('map').setView([51.505, -0.09], 13);
+    var map = L.map('map').setView([41.85544998608186, 12.469042539596558], 13);
 
     // Aggiungi il layer della mappa
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -123,7 +126,7 @@
     }).addTo(map);
 
     // Aggiungi un marker interattivo sulla mappa
-    var marker = L.marker([51.5, -0.09], {
+    var marker = L.marker([41.85544998608186, 12.469042539596558], {
         draggable: true // Permette all'amministratore di spostare il marker
     }).addTo(map);
 

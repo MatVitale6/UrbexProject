@@ -24,6 +24,7 @@ public class Place {
 	
 	private Double longitude;
 	private Double latitude;
+
 //	private Double altitude;
 	
 	@NotBlank
@@ -71,9 +72,19 @@ public class Place {
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+	public Double getLatitude() {return latitude;}
+
+	public void setLatitude(Double latidude) {this.latitude = latitude;}
+
+	public Double getLongitude() {return longitude;}
+
+	public void setLongitude(Double longitude) {this.longitude = longitude;}
+
 
 	public Photo getThumbnail() {return thumbnail;}
 

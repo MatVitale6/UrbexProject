@@ -115,8 +115,8 @@
 <script src="/js/leaflet.js"></script>
 <script>
     // Recupera le coordinate latitudine e longitudine dal modello del posto aggiunto
-    var latitude = /* recupera il valore della latitudine dal modello */;
-    var longitude = /* recupera il valore della longitudine dal modello */;
+    var latitude = place.latitude;
+    var longitude = place.longitude;
 
     // Inizializza la mappa
     var map = L.map('map').setView([latitude, longitude], 13);
