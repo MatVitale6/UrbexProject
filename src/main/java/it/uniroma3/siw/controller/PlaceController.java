@@ -101,14 +101,6 @@ public class PlaceController {
         
         return "redirect:place";
     }
-    /*
-    @PostMapping(value="/rejectPlace/{placeID}")
-    public String rejectPlace(@PathVariable("placeID") Long placeID, Model model) {
-        this.placeService.rejectPlace(placeID);
-
-        return "redirect:place.html";
-    }
-    */
 
     @GetMapping(value="/deletePhoto/{placeID}/{photoID}")
     public String deletePhoto(@PathVariable("placeID") Long placeID, @PathVariable("photoID") Long photoID, Model model) {
@@ -116,45 +108,6 @@ public class PlaceController {
 
         return "redirect:/admin/formUpdatePlace/"+placeID;
     }
-
-    /* Metodi get per l'aggiornamento delle informazioni sui place */
-    /*@GetMapping(value="/admin/formUpdatePlace/{placeID}")
-    public String formUpdatePlace(@PathVariable("placeID") Long placeID, Model model) {
-        Place place;
-        try {
-            place = this.placeService.findPlaceByID(placeID);
-            model.addAttribute("place", place);
-
-            return "return admin/formUpdatePlace.html";
-        }
-        catch (Exception e) {
-            return "/resourceNotFound.html";
-        }
-    }
-*/
-
-    /* Metodo post per l'aggiornamento delle informazioni riguardo ad un place 
-
-
-    @GetMapping(value="/admin/formUpdatePlace/{placeID}")
-    public String updatePlaceDetail(@PathVariable("placeID") Long placeID, Model model) {
-
-        Place place = this.placeService.findPlaceByID(placeID);
-        model.addAttribute(place);
-        model.addAttribute("photos1", this.photoRepository.findAllByPlaceIsNull());
-        model.addAttribute("photos2", this.photoRepository.findAllByPlaceIsNotNull());
-
-        return "/admin/formUpdatePlace";
-    }
-
-    /*
-    @PostMapping("/admin/updatePlacePhoto/{placeID}")
-    public String updatePlacePhoto(@PathVariable("placeID") Long placeID, @RequestParam("file") MultipartFile[] file) throws IOException {
-        this.placeService.updatePlaceImage(placeID, file);
-
-        return "place.html";
-    }
-    */
 
     /* Pagine per l'utente admin per la gestione e visualizzazione dei luoghi */
     @GetMapping(value="admin/indexPlace")
@@ -168,68 +121,6 @@ public class PlaceController {
 
         return "admin/managePlaces.html";
     }
-
-    /*
-    @GetMapping("/admin/managePhotosPlace/{placeID}")
-    public String managePhotos(@PathVariable("placeID") Long id, Model model) {
-        Place place = this.placeService.findPlaceByID(id);
-        model.addAttribute(place);
-        model.addAttribute("photos", this.photoRepository.findAll());
-        return "/admin/formUpdatePlace.html";
-    }
-    */
-
-    /*
-    @GetMapping("/admin/addPhotoToPlace/{photoID}/{placeID}")
-    public String addPhotoToPlace(@PathVariable("photoID") Long id1, @PathVariable("placeID") Long id2, Model model) {
-        model.addAttribute("photos", this.photoRepository.findAll());
-        Place place = this.placeService.findPlaceByID(id2);
-        Photo photo = this.photoRepository.findById(id1).get();
-        place.getPhotos().add(photo);
-        photo.setPlace(place);
-        this.placeService.createNewPlace(place); //questa é la save
-        this.photoRepository.save(photo);
-        model.addAttribute("photos1", this.photoRepository.findAllByPlaceIsNull());
-        model.addAttribute("photos2", this.photoRepository.findAllByPlaceIsNotNull());
-        model.addAttribute("place", place);
-        model.addAttribute("photo", photo);
-        return "/admin/formUpdatePlace.html";
-    }
-    */
-    /*
-    @GetMapping ("/admin/removePhotoToPlace/{photoID}/{placeID}")
-    public String removePhotoToPlace(@PathVariable("photoID") Long id1, @PathVariable("placeID") Long id2, Model model) {
-        model.addAttribute("photos", this.photoRepository.findAll());
-        Place place = this.placeService.findPlaceByID(id2);
-        Photo photo = this.photoRepository.findById(id1).get();
-        place.getPhotos().remove(photo);
-        photo.setPlace(null);
-        this.placeService.createNewPlace(place); //questa é la save
-        this.photoRepository.save(photo);
-        model.addAttribute("photos1", this.photoRepository.findAllByPlaceIsNull());
-        model.addAttribute("photos2", this.photoRepository.findAllByPlaceIsNotNull());
-        model.addAttribute("place", place);
-        model.addAttribute("photo", photo);
-        return "/admin/formUpdatePlace.html";
-    }
-    */
-        /*
-    @GetMapping(value="/admin/notApprovedPlace")
-    public String getNotApprovedPlace(Model model) {
-        model.addAttribute("places", this.placeRepository.findAllByApproved(false));
-
-        return "notApprovedPlaces.html";
-    }
-
-    /* Metodo getter per ottenere la pagina html con tutti i places presenti nel sito */
-    /* 
-    @GetMapping("/approvedPlace")
-    public String getApprovedPlaces(Model model) {
-        model.addAttribute("places", this.placeRepository.findAllByApproved(true));
-
-        return "places.html";
-    }
-    */
 
     /*Metodo per ottenere la pagina con tutti i places*/
     @GetMapping("/places")

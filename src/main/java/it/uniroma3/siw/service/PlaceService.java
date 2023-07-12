@@ -148,10 +148,10 @@ public class PlaceService {
 
     @Transactional
     public Photo deletePhotoFromPlace(Long placeID, Long photoID) {
-        Place oldPlace = this.placeRepository.findById(photoID).orElse(null);
+        Place oldPlace = this.placeRepository.findById(placeID).orElse(null);
         Photo oldPhoto = this.photoRepository.findById(photoID).orElse(null);
 
-        if(oldPlace.getPhotos().size() > 1) {
+        if(oldPlace.getPhotos().size() > 0) {
             oldPlace.getPhotos().remove(oldPhoto);
             this.photoRepository.delete(oldPhoto);
             this.placeRepository.save(oldPlace);
