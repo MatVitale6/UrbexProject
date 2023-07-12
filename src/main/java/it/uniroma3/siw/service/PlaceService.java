@@ -160,7 +160,7 @@ public class PlaceService {
     }
 
     @Transactional
-    public Place updatePlaceDetails(Long placeID, @Valid Place newPlace) {
+    public Place updatePlaceDetails(Long placeID, Place newPlace) {
         Place oldPlace = this.placeRepository.findById(placeID).orElse(null);
         if(oldPlace != null) {
             oldPlace.setName(newPlace.getName());

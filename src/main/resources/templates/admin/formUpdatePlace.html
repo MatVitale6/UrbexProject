@@ -37,32 +37,32 @@
         </header>
 
         <div class="container-xl align-items-center flex-row h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-            <form method="post" th:action="@{'/admin/updatePlaceDetails/'+${place.id}}">
-                <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Aggiorna informazioni luogo</h3>
-
-                <div class="rounded-3 border p-3">
-                    <div class="form-outline mb-3 text-center">
-                        <label class="block mb-2">Modifica nome</label>
-                        <label class="form-label" for="name"></label>
-                        <input type="text" id="name" class="form-control form-control-lg bg-success text-white" placeholder="Name" th:field="${place.name}"/>
+            <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Update place details</h3>
+            <div th:if="${place}">
+                <form method="POST" th:action="@{'/admin/updatePlaceDetails/'+${place.id}}">
+                    <div class="rounded-3 border p-3">
+                        <div class="form-outline mb-3 text-center">
+                            <label class="block mb-2">Update place name</label>
+                            <input type="text" th:field="${place.name}" class="form-control form-control-lg bg-success text-white"/>
+                        </div>
+                        <div class="form-outline mb-3 text-center">
+                            <label class="block mb-2">Update place description</label>
+                            <label class="form-label" for="description"></label>
+                            <input type="text" id="description" class="form-control form-control-lg bg-success text-white" placeholder="Description" th:field="${place.description}"/>
+                        </div>
+                        <div class="mt-8">
+                        </div>
+                        <div class="pt-3 mb-3 text-center">
+                            <button class="btn btn-outline-success btn-lg" type="submit">Update place</button>
+                        </div>
                     </div>
-                    <div class="form-outline mb-3 text-center">
-                        <label class="block mb-2">Modifica descrizione</label>
-                        <label class="form-label" for="description"></label>
-                        <input type="text" id="description" class="form-control form-control-lg bg-success text-white" placeholder="Description" th:field="${place.description}"/>
-                    </div>
-                    <div class="mt-8">
-                    </div>
-                    <div class="pt-3 mb-3 text-center">
-                        <button class="btn btn-outline-success btn-lg" type="submit">Add Place</button>
-                    </div>
-                </div>
-            </form>
-            <form method="POST" th:action="@{'/admin/updatePlacePhoto/'+${place.id}}" enctype="multipart/form-data">
-                <label class="block mb-2">Aggiungi Immagini</label>
-                <input type="file" name="file" multiple class="border border-gray-300 rounded px-4 py-2 w-full">
-                <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma</button>
-            </form>
+                </form>
+                <form method="POST" th:action="@{'/admin/updatePlacePhoto/'+${place.id}}" enctype="multipart/form-data">
+                    <label class="block mb-2">Add photos</label>
+                    <input type="file" name="file" multiple class="border border-gray-300 rounded px-4 py-2 w-full">
+                    <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                </form>
+            </div>
         </div>
         <footer class="mastfoot mt-5 text-center">
             <div class="inner">

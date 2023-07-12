@@ -80,11 +80,11 @@ public class PlaceController {
     }
 
     @PostMapping("/admin/updatePlaceDetails/{placeID}")
-    public String updateMovieDetails(@PathVariable("placeID") Long placeID, @Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model) throws IOException {
+    public String updatePlaceDetails(@PathVariable("placeID") Long placeID, @Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model) throws IOException {
         if(!bindingResult.hasErrors()) {
             this.placeService.updatePlaceDetails(placeID, place);
         }
-        return "redirect:/admin/formUpdatePlace"+placeID;
+        return "redirect:/place/"+placeID;
     }
 
     @PostMapping("/admin/updatePlacePhoto/{placeID}")
