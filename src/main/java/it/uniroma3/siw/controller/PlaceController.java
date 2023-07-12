@@ -236,6 +236,27 @@ public class PlaceController {
         model.addAttribute("place", place);
         model.addAttribute("review", new Review());
 
+        Double latitude = place.getLatitude();
+        Double longitude = place.getLongitude();
+
+        String script = "<script>"
+                + "var latitude = " + latitude + ";"
+                + "var longitude = " + longitude + ";"
+                + "// Inizializza la mappa\n" +
+                "    var map = L.map('map').setView([latitude, longitude], 13);\n" +
+                "\n" +
+                "    // Aggiungi il layer della mappa\n" +
+                "    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n" +
+                "        attribution: 'Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors',\n" +
+                "        maxZoom: 18,\n" +
+                "    }).addTo(map);\n" +
+                "\n" +
+                "    // Aggiungi un marker fisso sulla mappa per visualizzare la posizione\n" +
+                "    var marker = L.marker([latitude, longitude]).addTo(map);"
+                +"</script>";
+
+        model.addAttribute("mapScript", script);
+
         if(this.getCredentials() != null) {
             model.addAttribute("hasReview", this.reviewService.existsReviewByAuthorAndPlace(this.getCredentials().getUser().getId(), placeID));
         }
