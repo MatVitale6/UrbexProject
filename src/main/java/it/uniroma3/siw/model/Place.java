@@ -6,7 +6,6 @@ import java.util.Set;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -35,7 +34,7 @@ public class Place {
 	@OneToOne
 	private Photo thumbnail;
 	
-	@OneToMany(mappedBy="place")
+	@OneToMany
 	private Set<Photo> photos;
 	@OneToMany
 	private List<Review> reviews;

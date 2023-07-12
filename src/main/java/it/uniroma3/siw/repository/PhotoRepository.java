@@ -9,7 +9,7 @@ import java.util.List;
 public interface PhotoRepository extends CrudRepository<Photo, Long> {
 
 
-    public List<Photo> findAllByPlaceIsNull();
+    //public List<Photo> findAllByPlaceIsNull();
 
-    public List<Photo> findAllByPlaceIsNotNull();
+    //public List<Photo> findAllByPlaceIsNotNull();
 }

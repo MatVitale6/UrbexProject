@@ -31,7 +31,7 @@
                 </nav>
             </div>
             <div th:if="${userDetails}">
-                <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
+                <p style="margin-top: 50px; margin-right: 610px;"><br><br>Hello,<a th:text="${userDetails.username}"></a>!</p>
             </div>
         </header>
 
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="pt-3">
-                    <div id="map"></div>
+                    <div style="height: 400px;" id="map"></div>
                 </div>
 
                 <div class="row-6" th:unless="${place.reviews}"></div>

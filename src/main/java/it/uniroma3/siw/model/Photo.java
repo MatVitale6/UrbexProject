@@ -1,6 +1,5 @@
 package it.uniroma3.siw.model;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Objects;
@@ -8,7 +7,6 @@ import java.util.Objects;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
 
 @Entity
 @Table
@@ -23,13 +21,6 @@ public class Photo {
 	@NotNull
 	private byte[] imageData;
 
-	@Past
-	private LocalDate date;
-
-	@ManyToOne
-	private Place place;
-
-
 
 	public Long getId() {
 		return id;
@@ -37,14 +28,6 @@ public class Photo {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
 	}
 
 	public byte[] getData() {
@@ -65,14 +48,6 @@ public class Photo {
 
 	public void setFilename(String filename) {
 		this.filename = filename;
-	}
-
-	public Place getPlace() {
-		return place;
-	}
-
-	public void setPlace(Place place) {
-		this.place = place;
 	}
 
 	@Override

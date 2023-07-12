@@ -61,14 +61,14 @@ public class PlaceController {
     @PostMapping("/admin/place")
     public String createPlace(@Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model,
                              @RequestParam("file") MultipartFile file) throws IOException {
-        this.placeValidator.validate(place, bindingResult);
         
+        this.placeValidator.validate(place, bindingResult);
         if(!bindingResult.hasErrors()) {
-            return this.placeService.newPlace(place, file, model);
+            this.placeService.newPlace(place, file, model);
+            return "place.html";
         }                       
         else {
-            /*
-            *TODO: aggiungere messaggio di errore */
+            model.addAttribute("messaggioErrore", "Questo urbex esiste già");
             return "admin/formNewPlace.html";
         }
     }
@@ -91,7 +91,7 @@ public class PlaceController {
     public String updatePlacePhoto(@PathVariable("placeID") Long placeID, @RequestParam("file") MultipartFile[] file) throws IOException {
         this.placeService.updatePlaceImage(placeID, file);
 
-        return "place.html";
+        return "redirect:/admin/formUpdatePlace/"+placeID;
     }
 
     /* Metodo get per l'eliminazione di un place */
@@ -196,7 +196,7 @@ public class PlaceController {
         return "/admin/formUpdatePlace.html";
     }
     */
-
+    /*
     @GetMapping ("/admin/removePhotoToPlace/{photoID}/{placeID}")
     public String removePhotoToPlace(@PathVariable("photoID") Long id1, @PathVariable("placeID") Long id2, Model model) {
         model.addAttribute("photos", this.photoRepository.findAll());
@@ -212,6 +212,7 @@ public class PlaceController {
         model.addAttribute("photo", photo);
         return "/admin/formUpdatePlace.html";
     }
+    */
         /*
     @GetMapping(value="/admin/notApprovedPlace")
     public String getNotApprovedPlace(Model model) {
