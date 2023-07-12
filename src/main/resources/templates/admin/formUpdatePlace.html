@@ -43,7 +43,8 @@
                     <div class="rounded-3 border p-3">
                         <div class="form-outline mb-3 text-center">
                             <label class="block mb-2">Update place name</label>
-                            <input type="text" th:field="${place.name}" class="form-control form-control-lg bg-success text-white"/>
+                            <label class="form-label" for="name"></label>
+                            <input type="text" th:field="${place.name}" placeholder="Name" class="form-control form-control-lg bg-success text-white"/>
                         </div>
                         <div class="form-outline mb-3 text-center">
                             <label class="block mb-2">Update place description</label>
@@ -53,7 +54,7 @@
                         <div class="mt-8">
                         </div>
                         <div class="pt-3 mb-3 text-center">
-                            <button class="btn btn-outline-success btn-lg" type="submit">Update place</button>
+                            <button type="submit" class="btn btn-outline-success btn-lg">Update place</button>
                         </div>
                     </div>
                 </form>
