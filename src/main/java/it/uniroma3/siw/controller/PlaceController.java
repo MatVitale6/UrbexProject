@@ -86,7 +86,7 @@ public class PlaceController {
         if(!bindingResult.hasErrors()) {
             this.placeService.updatePlaceDetails(placeID, place);
         }
-        return "redirect:/admin/formUpdatePlace/"+placeID;
+        return "redirect:/place/"+placeID;
     }
 
     @PostMapping("/admin/updatePlacePhoto/{placeID}")
@@ -207,8 +207,4 @@ public class PlaceController {
 		}
 		return null;
 	}
-
-
-
-
 }

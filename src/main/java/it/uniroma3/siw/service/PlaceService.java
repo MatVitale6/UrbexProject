@@ -127,19 +127,6 @@ public class PlaceService {
 
         return place;
     }
-    /*
-    @Transactional
-    public Place rejectPlace(Long placeID) {
-        Place place = this.placeRepository.findById(placeID).orElse(null);
-
-        if(place.isApproved() == false) {
-
-            place.getRecommendedBy().getPlacesToApprove().remove(place);
-            this.placeRepository.delete(place);
-        }
-        return place;
-    }
-    */
 
     @Transactional
     public void updatePlaceImage(Long placeID, MultipartFile[] file) throws IOException {
@@ -169,13 +156,12 @@ public class PlaceService {
     }
 
     @Transactional
-    public Place updatePlaceDetails(Long placeID, Place newPlace) {
+    public void updatePlaceDetails(Long placeID, Place newPlace) {
         Place oldPlace = this.placeRepository.findById(placeID).orElse(null);
         if(oldPlace != null) {
             oldPlace.setName(newPlace.getName());
             oldPlace.setDescription(newPlace.getDescription());
             placeRepository.save(oldPlace);
         }
-        return oldPlace;
     }
 }
