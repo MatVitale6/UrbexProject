@@ -101,7 +101,7 @@ public class PlaceController {
     public String deletePlace(@PathVariable("placeID") Long placeID, Model model) {
         this.placeService.deletePlace(placeID);
         
-        return "redirect:place";
+        return "/admin/managePlaces.html";
     }
 
     @GetMapping(value="/deletePhoto/{placeID}/{photoID}")
