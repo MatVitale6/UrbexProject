@@ -11,8 +11,9 @@
 </head>
 <body class="text-center">
 
-<div class="background-container">
-    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+<div>
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-row">
+        <div class="col-sm-6">
         <header class="masthead mb-auto">
             <div class="inner">
                 <h3 class="masthead-brand">Urbex</h3>
@@ -69,6 +70,28 @@
             </div>
         </footer>
     </div>
+
+        <div class="col-sm-6 px-2 d-none d-sm-block mt-5">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-top: 120px;">        <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
+                    <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${place.getThumbnail().getImgData()}" alt="Second slide">
+                </div>
+
+                <div th:each="img : ${place.getPhotos()}" class="carousel-item">
+                    <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${img.getImgData()}" alt="Second slide">
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only"></span>
+                </a>
+            </div>
+            </div>
+        </div>
 </div>
 
 
