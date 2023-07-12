@@ -1,23 +1,24 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Urbex Collection</title>
-    <link rel="stylesheet" href="/css/bootstrap.rtl.min.css">
-    <link rel="stylesheet" href="/css/cover.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/leaflet.css">
     <link rel="stylesheet" href="/css/stile.css">
-</head>
-<body class="text-center">
 
-<div>
-    <div class="cover-container d-flex h-100 p-3 mx-auto flex-row">
-        <div class="col-sm-6">
-        <header class="masthead mb-auto">
-            <div class="inner">
+
+</head>
+
+<body class="container-fluid">
+<div class="container-fluid d-flex h-100 m-lg-3 mr-3 flex-row">
+    <div class="col-sm-6">
+        <header class="masthead mt-2 mb-auto">
+            <div class="inner row-3">
                 <h3 class="masthead-brand">Urbex</h3>
-                <nav class="nav nav-masthead justify-content-center">
+                <nav class="nav nav-masthead justify-content-center row-6">
                     <a class="nav-link active" href="/">Home</a>
                     <div class="px-2">
                         <div th:if="${userDetails != null}">
@@ -31,77 +32,72 @@
                 </nav>
             </div>
             <div th:if="${userDetails}">
-                <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
+                <p style="margin-top: 50px; margin-right: 610px;"><br><br>Hello,<a th:text="${userDetails.username}"></a>!</p>
             </div>
         </header>
 
-        <div class="bg-dark rounded-3 overflow-auto">
-            <div class="align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-xl-0 mt-xl-n5">
-                    <form method="post" th:action="@{'/admin/updatePlaceDetails/'+${place.id}}">
-                        <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Aggiorna informazioni luogo</h3>
+        <div class="container-xl align-items-center flex-row h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+            <form method="post" th:action="@{'/admin/updatePlaceDetails/'+${place.id}}">
+                <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Aggiorna informazioni luogo</h3>
 
-                        <div class="form-outline mb-3 text-center">
-                            <label class="block mb-2">Modifica nome</label>
-                            <label class="form-label" for="name"></label>
-                            <input type="text" id="name" class="form-control form-control-lg bg-success text-white" placeholder="Name" th:field="${place.name}"/>
-                        </div>
-                        <div class="form-outline mb-3 text-center">
-                            <label class="block mb-2">Modifica descrizione</label>
-                            <label class="form-label" for="description"></label>
-                            <input type="text" id="description" class="form-control form-control-lg bg-success text-white" placeholder="Description" th:field="${place.description}"/>
-                        </div>
-                        <div class="mt-8">
-                            <form method="POST" th:action="@{'/admin/updatePlacePhoto/'+${place.id}}" enctype="multipart/form-data">
-                                <label class="block mb-2">Aggiungi Immagini</label>
-                                <input type="file" name="file" multiple class="border border-gray-300 rounded px-4 py-2 w-full">
-                                <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma</button>
-                            </form>
-                        </div>
-                        <div class="pt-3 mb-3 text-center">
-                            <button class="btn btn-outline-success btn-lg" type="submit">Add Place</button>
-                        </div>
-                    </form>
-            </div>
+                <div class="rounded-3 border p-3">
+                    <div class="form-outline mb-3 text-center">
+                        <label class="block mb-2">Modifica nome</label>
+                        <label class="form-label" for="name"></label>
+                        <input type="text" id="name" class="form-control form-control-lg bg-success text-white" placeholder="Name" th:field="${place.name}"/>
+                    </div>
+                    <div class="form-outline mb-3 text-center">
+                        <label class="block mb-2">Modifica descrizione</label>
+                        <label class="form-label" for="description"></label>
+                        <input type="text" id="description" class="form-control form-control-lg bg-success text-white" placeholder="Description" th:field="${place.description}"/>
+                    </div>
+                    <div class="mt-8">
+                    </div>
+                    <div class="pt-3 mb-3 text-center">
+                        <button class="btn btn-outline-success btn-lg" type="submit">Add Place</button>
+                    </div>
+                </div>
+            </form>
+            <form method="POST" th:action="@{'/admin/updatePlacePhoto/'+${place.id}}" enctype="multipart/form-data">
+                <label class="block mb-2">Aggiungi Immagini</label>
+                <input type="file" name="file" multiple class="border border-gray-300 rounded px-4 py-2 w-full">
+                <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma</button>
+            </form>
         </div>
-
-        <footer class="mastfoot mt-auto">
+        <footer class="mastfoot mt-5 text-center">
             <div class="inner">
                 <p>Urbex Collection by <a href="https://www.instagram.com/kaumawa/?hl=it">Kaumawa</a> and <a href="https://www.instagram.com/gaspacioo/">Gaspacioo</a>.</p>
             </div>
         </footer>
     </div>
 
-        <div class="col-sm-6 px-2 d-none d-sm-block mt-5">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-top: 120px;">        <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
-                    <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${place.getThumbnail().getImgData()}" alt="Second slide">
-                </div>
 
-                <div th:each="img : ${place.getPhotos()}" class="carousel-item">
-                    <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${img.getImgData()}" alt="Second slide">
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only"></span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only"></span>
-                </a>
+
+    <div class="col-sm-6 px-2 d-none d-sm-block mt-5">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-top: 120px;">        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
+                <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${place.getThumbnail().getImgData()}" alt="Second slide">
             </div>
+
+            <div th:each="img : ${place.getPhotos()}" class="carousel-item">
+                <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${img.getImgData()}" alt="Second slide">
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only"></span>
+            </a>
         </div>
+        </div>
+    </div>
 </div>
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="../../../../assets/js/vendor/popper.min.js"></script>
-<script src="../../../../dist/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="/js/leaflet.js"></script>
 </body>
 </html>
