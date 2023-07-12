@@ -67,7 +67,7 @@ public class PlaceService {
     }
 
     @Transactional
-    public String newPlace(@Valid Place place, @RequestParam("file") MultipartFile file, Model model) throws IOException {
+    public void newPlace(@Valid Place place, @RequestParam("file") MultipartFile file, Model model) throws IOException {
         if(!placeRepository.existsByAddressAndName(place.getAddress(), place.getName())) {
             Photo img = new Photo();
             img.setFilename(file.getResource().getFilename());
@@ -77,11 +77,9 @@ public class PlaceService {
             this.placeRepository.save(place);
             model.addAttribute("hasReview", this.existsReviewByAuthorAndPlace(this.getCredentials().getUser().getId(), place.getId()));
             model.addAttribute("place", place);
-            return "place.html";
         }
         else {
             model.addAttribute("messaggioErrore", "Questo urbex esiste già");
-            return "admin/formNewPlace.html";
         }
     }
 
