@@ -79,7 +79,7 @@ public class PlaceController {
         return "admin/formUpdatePlace.html";
     }
 
-    @PostMapping("/admin/formUpdatePlace/{placeID}")
+    @PostMapping("/admin/updatePlaceDetails/{placeID}")
     public String updateMovieDetails(@PathVariable("placeID") Long placeID, @Valid @ModelAttribute("place") Place place, BindingResult bindingResult, Model model) throws IOException {
         if(!bindingResult.hasErrors()) {
             this.placeService.updatePlaceDetails(placeID, place);

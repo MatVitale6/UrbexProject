@@ -4,68 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Urbex Collection</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="/css/cover.css">
+    <link rel="stylesheet" href="/css/leaflet.css">
     <link rel="stylesheet" href="/css/stile.css">
-
 </head>
-<body>
-<div class="container-md d-flex h-75 p-3 mx-auto flex-column">
-    <header class="masthead mb-auto">
-        <div class="inner">
-            <h3 class="masthead-brand">Urbex</h3>
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="/">Home</a>
-                <div class="px-2">
-                    <div th:if="${userDetails != null}">
-                        <a class="nav-link" href="/logout">Logout</a>
+<body class="text-center">
+
+<div class="background-container">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand">Urbex</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link active" href="/">Home</a>
+                    <div class="px-2">
+                        <div th:if="${userDetails != null}">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </div>
+                        <div th:unless="${userDetails != null}">
+                            <a class="nav-link" href="/login">Login</a>
+                        </div>
                     </div>
-                    <div th:unless="${userDetails != null}">
-                        <a class="nav-link" href="/login">Login</a>
-                    </div>
-                </div>
-                <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
-            </nav>
+                    <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
+                </nav>
+            </div>
+            <div th:if="${userDetails}">
+                <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
+            </div>
+        </header>
+
+        <div class="bg-dark rounded-3 overflow-auto">
+            <div class="align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-xl-0 mt-xl-n5">
+                    <form method="post" th:action="@{'/admin/updatePlaceDetails/'+${place.id}}">
+                        <h3 class="fw-normal mb-3 pb-3 text-center" style="letter-spacing: 1px;">Aggiorna informazioni luogo</h3>
+
+                        <div class="form-outline mb-3 text-center">
+                            <label class="block mb-2">Modifica nome</label>
+                            <label class="form-label" for="name"></label>
+                            <input type="text" id="name" class="form-control form-control-lg bg-success text-white" placeholder="Name" th:field="${place.name}"/>
+                        </div>
+                        <div class="form-outline mb-3 text-center">
+                            <label class="block mb-2">Modifica descrizione</label>
+                            <label class="form-label" for="description"></label>
+                            <input type="text" id="description" class="form-control form-control-lg bg-success text-white" placeholder="Description" th:field="${place.description}"/>
+                        </div>
+                        <div class="mt-8">
+                            <form method="POST" th:action="@{'/admin/updatePlacePhoto/'+${place.id}}" enctype="multipart/form-data">
+                                <label class="block mb-2">Aggiungi Immagini</label>
+                                <input type="file" name="file" multiple class="border border-gray-300 rounded px-4 py-2 w-full">
+                                <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Conferma</button>
+                            </form>
+                        </div>
+                        <div class="pt-3 mb-3 text-center">
+                            <button class="btn btn-outline-success btn-lg" type="submit">Add Place</button>
+                        </div>
+                    </form>
+            </div>
         </div>
-        <div th:if="${userDetails}">
-            <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
-        </div>
-    </header>
-    <h1>Aggiorna film</h1>
-    <div th:if="${place}">
-       <div>
-           <span th:text="${place.name}">Up!</span>
-           <span th:text="${place.address}">Up!</span>
-           <span th:text="'(' + ${place.region} + ')'">2000</span>
-       </div>
 
-       <div th:each="img: ${place.photos}">
-           <img th:src="'data:image/jpeg;base64,'+${img.getImgData()}">
-           <a th:href="'/deleteImage/'+ ${place.id} + '/' + ${img.id}">Elimina immagine</a>
-       </div>
-       <div>
-           <form method="POST" th:action="@{'/admin/updatePlacePhoto/'+${place.id}}" enctype="multipart/form-data">
-               <label>Aggiungi immagini: </label>
-               <input type="file" name="file">
-               <button type="submit">Conferma</button>
-           </form>
-       </div>
-
-
-
-
-        <footer class="mastfoot mt-5 text-center">
+        <footer class="mastfoot mt-auto">
             <div class="inner">
                 <p>Urbex Collection by <a href="https://www.instagram.com/kaumawa/?hl=it">Kaumawa</a> and <a href="https://www.instagram.com/gaspacioo/">Gaspacioo</a>.</p>
             </div>
         </footer>
     </div>
 </div>
-</div>
 
-<!-- Includi la libreria di script di Bootstrap -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="../../../../assets/js/vendor/popper.min.js"></script>
+<script src="../../../../dist/js/bootstrap.min.js"></script>
+<script src="/js/leaflet.js"></script>
 </body>
 </html>
