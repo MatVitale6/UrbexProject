@@ -54,7 +54,7 @@
                     <div class="rounded-3  border p-3 mb-1" th:each="review : ${place.reviews}">
                         <div>
                             <a class="text-success" >Title:</a> <a th:text="${review.title}"> </a>
-                            <a class="text-success p-5" >Rating:</a> <a th:text="${review.rating}"> </a>
+                            <a class="text-success p-3" >Rating:</a> <a th:text="${review.rating}"> </a>
                         </div>
                         <div>
                             <a class="text-success mb-0">User:</a> <a th:text="${review.author.name}"></a>

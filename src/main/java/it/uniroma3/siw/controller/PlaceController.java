@@ -137,6 +137,7 @@ public class PlaceController {
     public String getPlace(@PathVariable("placeID") Long placeID, Model model) {
         Place place;
         model.addAttribute("credentials", this.getCredentials());
+        model.addAttribute("reviews", this.reviewService);
         try {
             place = placeService.findPlaceByID(placeID);
         }

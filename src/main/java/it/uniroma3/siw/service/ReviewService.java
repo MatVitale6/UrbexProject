@@ -14,6 +14,8 @@ import it.uniroma3.siw.repository.ReviewRepository;
 import it.uniroma3.siw.repository.UserRepository;
 import jakarta.transaction.Transactional;
 
+import java.util.List;
+
 @Service
 public class ReviewService {
     
@@ -67,4 +69,5 @@ public class ReviewService {
 
         return this.reviewRepository.existsByAuthorAndPlace(user, place);
     }
+
 }
