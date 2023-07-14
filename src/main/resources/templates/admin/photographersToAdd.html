@@ -29,12 +29,12 @@
     </nav>
   </div>
   <div th:if="${userDetails}">
-    <p style="margin-top: 0px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
+      <p style="margin-top: 50px; margin-right: 610px;">Hello,<a th:text="${userDetails.username}"></a>!</p>
 </div>
 </header>
 
   <div class="container-sm text-center mt-3">
-    <h2>Here is all the places on the website</h2>
+    <h2>Here is all the photographers on the website</h2>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <!--<ol class="carousel-indicators">
@@ -47,17 +47,17 @@
         <div class="carousel-item active">
           <img class="w-75" src="/images/ResourceNotFound_Background.jpeg" alt="First slide">
           <div class="carousel-caption d-none d-md-block text-bg-success rounded-3 border border-dark">
-            <h5>Swipe for more places</h5>
+            <h5>Swipe for more photographers</h5>
           </div>
         </div>
 
-        <div th:each="place : ${places}" class="carousel-item">
+        <div th:each="photographer : ${photographersToAdd}" class="carousel-item">
           <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
           <!--<img class="d-block w-100" th:src="'data:image/jpeg;base64,'+${place.getThumbnail().getImgData()}" alt="First slide">-->
-          <img class="w-75 h-75" style="object-position: right;" th:src="'data:image/jpeg;base64,'+${place.getThumbnail().getImgData()}" alt="Second slide">
+          <img class="w-75 h-75" style="object-position: right;" th:src="'data:image/jpeg;base64,'+${photographer.getPhotographerPhoto().getImgData()}" alt="Second slide">
           <div class="carousel-caption d-none d-md-block text-bg-success rounded-3 border border-dark">
-            <h3><a th:href="@{'place' + '/' + ${place.id}}" th:text="${place.name}">Forza Roma</a></h3>
-            <p th:text="${place.description}">Sempre Forza ROMA!</p>
+            <h3><a th:href="@{'photographer' + '/' + ${photographer.id}}" th:text="${photographer.name} + ' ' + ${photographer.surname}">Forza Roma</a></h3>
+            <p><a class="btn btn-outline-light btn-sm" th:href="@{'/admin/addPhotographerToPlace' + '/' + ${photographer.id} + '/' + ${place.id}}">Add this photographer</a></p>
           </div>
         </div>
 
@@ -70,7 +70,12 @@
         <span class="sr-only"></span>
       </a>
     </div>
+    <div class="pt-1 mb-3 text-center">
+        <a  class="btn btn-outline-success btn-lg mt-2" th:href="@{'/admin/formUpdatePlace/'+ ${place.id}}">Save and exit</a>
+    </div>
   </div>
+
+
   <footer class="mastfoot mt-5 text-center">
     <div class="inner">
       <p>Urbex Collection by <a href="https://www.instagram.com/kaumawa/?hl=it">Kaumawa</a> and <a href="https://www.instagram.com/gaspacioo/">Gaspacioo</a>.</p>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Urbex Collection</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/leaflet.css">
+    <link rel="stylesheet" href="/css/stile.css">
+
+
+</head>
+
+<body class="container-fluid">
+<div class="container-fluid d-flex h-100 m-lg-3 mr-3 flex-row">
+    <div class="col-sm-6">
+        <header class="masthead mt-2 mb-auto">
+            <div class="inner row-3">
+                <h3 class="masthead-brand">Urbex</h3>
+                <nav class="nav nav-masthead justify-content-center row-6">
+                    <a class="nav-link active" href="/">Home</a>
+                    <div class="px-2">
+                        <div th:if="${userDetails != null}">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </div>
+                        <div th:unless="${userDetails != null}">
+                            <a class="nav-link" href="/login">Login</a>
+                        </div>
+                    </div>
+                    <a class="nav-link" th:href="@{/formSearchPlaces}">Search</a>
+                </nav>
+            </div>
+            <div th:if="${userDetails}">
+                <p style="margin-top: 50px; margin-right: 610px;"><br><br>Hello,<a th:text="${userDetails.username}"></a>!</p>
+            </div>
+        </header>
+
+        <div class="container-xl align-items-center flex-row h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+            <div class="row-6" th:if="${photographer}">
+                <h3 th:text="${photographer.name} + ' ' + ${photographer.surname}" class="border bg-success p-3 rounded-3">Forza Roma</h3>
+                <div class="rounded-3 border p-3">
+                    <p class="text-success">Date of birth: <a class="text-light" th:text="${photographer.dateOfBirth}">Sempre Forza ROMA!</a></p>
+                </div>
+            </div>
+        </div>
+        <footer class="mastfoot mt-5 text-center">
+            <div class="inner">
+                <p>Urbex Collection by <a href="https://www.instagram.com/kaumawa/?hl=it">Kaumawa</a> and <a href="https://www.instagram.com/gaspacioo/">Gaspacioo</a>.</p>
+            </div>
+        </footer>
+    </div>
+
+
+
+    <div class="col-sm-6 px-2 d-none d-sm-block mt-5">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-top: 120px;">        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <!-- questa immagine va cambiata ovv va inserita una da photos, o aggiungiamo nel model "copertina" ?-->
+                <img class="w-100 vh-100" style="object-fit: cover; object-position: right;" th:src="'data:image/jpeg;base64,'+${photographer.getPhotographerPhoto().getImgData()}" alt="Second slide">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="/js/leaflet.js"></script>
+</body>
+</html>

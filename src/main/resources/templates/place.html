@@ -47,6 +47,20 @@
                 <div class="pt-3">
                     <div style="height: 400px;" id="map"></div>
                 </div>
+                <div class="row-6 mt-3">
+                    <p class="border bg-success p-3 rounded-3 p-3" th:text="'People that have photographed ' + ${place.name}"></p>
+                    <div class="rounded-3  border p-3">
+                        <div class="text-danger" th:if="${place.photographers.isEmpty()}">There are no photographers for this place</div>
+                        <ul>
+                            <li th:each="photographer : ${place.photographers}">
+                                <div th:if="${userDetails}">
+                                    <a th:text="${photographer.name}+' '+${photographer.surname}"></a>
+                                    <a  th:if="${credentials.isAdmin()}" class="text-danger" th:href="@{'/admin/removePhotographerFromPlace/'+ ${photographer.id}+'/'+${place.id}}">Cancella</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
                 <div class="row-6" th:unless="${place.reviews}"></div>
                 <div class="row-6 mt-3">

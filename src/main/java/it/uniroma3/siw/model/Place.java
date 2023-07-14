@@ -23,8 +23,6 @@ public class Place {
 	
 	private Double longitude;
 	private Double latitude;
-
-//	private Double altitude;
 	
 	@NotBlank
 	private String region;
@@ -38,13 +36,11 @@ public class Place {
 	private Set<Photo> photos;
 	@OneToMany
 	private List<Review> reviews;
+	@ManyToMany
+	private Set<Photographer> photographers;
 
-	//private boolean isApproved;
 
-	//private User recommendedBy;
-	
-
-    public Long getId() {
+	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
@@ -100,14 +96,12 @@ public class Place {
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
 	}
-	/*
-	public User getRecommendedBy() {
-        return recommendedBy;
-    }
-    public void setRecommendedBy(User recommendedBy) {
-        this.recommendedBy = recommendedBy;
-    }
-	*/
+	public Set<Photographer> getPhotographers() {
+		return photographers;
+	}
+	public void setPhotographers(Set<Photographer> photographers) {
+		this.photographers = photographers;
+	}
 
 	@Override
 	public int hashCode() {

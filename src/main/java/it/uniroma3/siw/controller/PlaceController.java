@@ -1,7 +1,9 @@
 package it.uniroma3.siw.controller;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,8 +20,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.controller.validator.PlaceValidator;
 import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.Photographer;
 import it.uniroma3.siw.model.Place;
 import it.uniroma3.siw.model.Review;
+import it.uniroma3.siw.repository.PhotographerRepository;
 import it.uniroma3.siw.repository.PlaceRepository;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.PlaceService;
@@ -42,6 +46,9 @@ public class PlaceController {
     @Autowired
     private CredentialsService credentialsService;
 
+    @Autowired
+    private PhotographerRepository photographerRepository;
+
 
     /* metodo getter per ottenere la form per la creazione di un nuovo place in attesa di approvazione */
     @GetMapping(value="/admin/formNewPlace")
@@ -61,7 +68,7 @@ public class PlaceController {
         this.placeValidator.validate(place, bindingResult);
         if(!bindingResult.hasErrors()) {
             this.placeService.newPlace(place, file, model);
-            return "place.html";
+            return "placeTmp.html";
         }                       
         else {
             model.addAttribute("messaggioErrore", "Questo urbex esiste già");
@@ -195,8 +202,56 @@ public class PlaceController {
         return "foundPlaces.html";
     }
 
-    
+    @GetMapping(value="/admin/addPhotographerToPlace/{photographerID}/{placeID}")
+	public String addPhotographerToPlace(@PathVariable("photographerID") Long photographerID, @PathVariable("placeID") Long placeID, Model model) {
+		Place place = this.placeRepository.findById(placeID).get();
+		Photographer photographer = this.photographerRepository.findById(photographerID).get();
+		Set<Photographer> photographers = place.getPhotographers();
+		photographers.add(photographer);
+		this.placeRepository.save(place);
+		
+		List<Photographer> photographersToAdd = photographersToAdd(placeID);
+		
+		model.addAttribute("place", place);
+		model.addAttribute("photographersToAdd", photographersToAdd);
 
+		return "admin/photographersToAdd.html";
+	}
+
+    @GetMapping(value="/admin/removePhotographerFromPlace/{photographerID}/{placeID}")
+	public String removePhotographerFromPlace(@PathVariable("photographerID") Long photographerID, @PathVariable("placeID") Long placeID, Model model) {
+		Place place = this.placeRepository.findById(placeID).get();
+		Photographer photographer = this.photographerRepository.findById(photographerID).get();
+		Set<Photographer> photographers = place.getPhotographers();
+		photographers.remove(photographer);
+		this.placeRepository.save(place);
+		
+		List<Photographer> photographersToAdd = photographersToAdd(placeID);
+		
+		model.addAttribute("place", place);
+		model.addAttribute("photographersToAdd", photographersToAdd);
+
+        return "redirect:/place/"+placeID;
+	}
+
+    @GetMapping("/admin/updatePhotographers/{placeID}")
+	public String updatePhotographers(@PathVariable("placeID") Long placeID, Model model) {
+
+		List<Photographer> photographersToAdd = this.photographersToAdd(placeID);
+		model.addAttribute("photographersToAdd", photographersToAdd);
+		model.addAttribute("place", this.placeRepository.findById(placeID).get());
+
+		return "admin/photographersToAdd.html";
+	}
+
+    private List<Photographer> photographersToAdd(Long placeId) {
+		List<Photographer> photographersToAdd = new ArrayList<>();
+
+		for (Photographer p : photographerRepository.findPhotographersNotInPlace(placeId)) {
+			photographersToAdd.add(p);
+		}
+		return photographersToAdd;
+	}
 
 	private Credentials getCredentials() {
 		if (!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
