@@ -25,8 +25,14 @@ public class Photographer {
     private String name;
     @NotBlank
     private String surname;
+    @NotBlank
+    private String email;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String phoneNumber;
+
+    private String bio;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
 
     @ManyToMany(mappedBy="photographers")
@@ -88,6 +94,29 @@ public class Photographer {
         this.photographerPhoto = photographerPhoto;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
     @Override
 	public int hashCode() {
 		return Objects.hash(name, surname);

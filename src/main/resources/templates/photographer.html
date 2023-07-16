@@ -39,7 +39,10 @@
             <div class="row-6" th:if="${photographer}">
                 <h3 th:text="${photographer.name} + ' ' + ${photographer.surname}" class="border bg-success p-3 rounded-3">Forza Roma</h3>
                 <div class="rounded-3 border p-3">
+                    <p class="text-success">Email: <a class="text-light" th:text="${photographer.email}">Sempre Forza ROMA!</a></p>
+                    <p class="text-success">Phone number: <a class="text-light" th:text="${photographer.phoneNumber}">Sempre Forza ROMA!</a></p>
                     <p class="text-success">Date of birth: <a class="text-light" th:text="${photographer.dateOfBirth}">Sempre Forza ROMA!</a></p>
+                    <p class="text-success">Bio: <a class="text-light" th:text="${photographer.bio}">Sempre Forza ROMA!</a></p>
                 </div>
             </div>
         </div>

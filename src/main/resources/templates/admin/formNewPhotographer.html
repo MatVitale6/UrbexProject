@@ -55,6 +55,26 @@
                             <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
                             <label class="form-label" for="surname"></label>
                         </div>
+
+                        <div class="form-outline col-sm-6 text-center">
+                            <input type="email" id="email" class="form-control form-control-lg bg-success text-white" placeholder="Email" required th:field="${photographer.email}"/>
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                            <label class="form-label" for="email"></label>
+                        </div>
+
+                        <div class="form-outline col-sm-6 text-center">
+                            <input type="tel" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" id="phoneNumber" class="form-control form-control-lg bg-success text-white" placeholder="Phone Number" th:field="${photographer.phoneNumber}" maxlength="12" minlength="12"/>
+                            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+                            <label class="form-label" for="phoneNumber"></label>
+                        </div>
+
+                        <div class="form-outline col-sm- text-center">
+                            <input type="text" id="bio" class="form-control form-control-lg bg-success text-white" placeholder="Bio" th:field="${photographer.bio}"/>
+                            <span th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}"></span>
+                            <label class="form-label" for="bio"></label>
+                        </div>
+
+
                     </div>
 
                     <div class="form-outline mb-3 text-center">
